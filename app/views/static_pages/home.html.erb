@@ -1,2 +1,89 @@
-<h1>StaticPages#home</h1>
-<p>Find me in app/views/static_pages/home.html.erb</p>
+<div id="myCarousel" class="carousel slide" data-ride="carousel">
+  <ol class="carousel-indicators">
+    <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+    <li data-target="#myCarousel" data-slide-to="1"></li>
+    <li data-target="#myCarousel" data-slide-to="2"></li>
+  </ol>
+  <div class="carousel-inner" role="listbox">
+    <div class="item active">
+      <%= image_tag "rock.jpg", class: "first-slide" %>
+      <div class="container">
+        <div class="carousel-caption">
+          <h1>First Epic Slide</h1>
+          <p>Here is a description of how awesome you'll be if you take one of our tests. People will think you are smart and stuff.</p>
+          <p><%= link_to "Learn More", "#", class: "btn btn-lg btn-primary" %></p>
+        </div>
+      </div>
+    </div>
+    <div class="item">
+      <%= image_tag "stars.jpg", class: "second-slide" %>
+      <div class="container">
+        <div class="carousel-caption">
+          <h1>Another Epic Slide</h1>
+          <p>Here is a description about why you should purchase your own testing subdomain from us and make money and stuff.</p>
+          <p><%= link_to "Buy Stuff", "#", class: "btn btn-lg btn-primary" %></p>
+        </div>
+      </div>
+    </div>
+    <div class="item">
+      <%= image_tag "waterfall.jpg", class: "third-slide" %>
+      <div class="container">
+        <div class="carousel-caption">
+          <h1>Final Epic Slide</h1>
+          <p>Make your friends or family or employees take this test and keep the results for yourself.</p>
+          <p><%= link_to "Quiz People", "#", class: "btn btn-lg btn-primary" %></p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
+    <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+    <span class="sr-only">Previous</span>
+  </a>
+  <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
+    <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+    <span class="sr-only">Next</span>
+  </a>
+</div>
+
+<div class="container marketing">
+
+
+  <!-- START THE FEATURETTES -->
+
+
+  <div class="row featurette">
+    <div class="col-md-7">
+      <h2 class="featurette-heading">First featurette heading. <span class="text-muted">It'll blow your mind.</span></h2>
+      <p class="lead">Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis euismod semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus commodo.</p>
+    </div>
+    <div class="col-md-5">
+      <%= image_tag "rock.jpg", class: "featurette-image img-responsive center-block" %>
+    </div>
+  </div>
+
+  <hr class="featurette-divider">
+
+  <div class="row featurette">
+    <div class="col-md-7 col-md-push-5">
+      <h2 class="featurette-heading">Oh yeah, it's that good. <span class="text-muted">See for yourself.</span></h2>
+      <p class="lead">Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis euismod semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus commodo.</p>
+    </div>
+    <div class="col-md-5 col-md-pull-7">
+      <%= image_tag "stars.jpg", class: "featurette-image img-responsive center-block" %>
+    </div>
+  </div>
+
+  <hr class="featurette-divider">
+
+  <div class="row featurette">
+    <div class="col-md-7">
+      <h2 class="featurette-heading">And lastly, this one. <span class="text-muted">Checkmate.</span></h2>
+      <p class="lead">Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis euismod semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus commodo.</p>
+    </div>
+    <div class="col-md-5">
+      <%= image_tag "waterfall.jpg", class: "featurette-image img-responsive center-block" %>
+    </div>
+  </div>
+
+  <hr class="featurette-divider">
