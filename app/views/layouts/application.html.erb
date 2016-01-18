@@ -47,15 +47,15 @@
         </button>
         <a class="navbar-brand" href="#">Assessment</a>
         <div class="navbar-collapse collapse navbar-responsive-collapse">
-          <ul class="nav navbar-nav">
+          <ul class="nav navbar-nav col-md-10">
             <li><%= link_to "Link1", "/path1"  %></li>
             <li><%= link_to "Link2", "/path2"  %></li>
             <li><%= link_to "Link3", "/path3"  %></li>
             <% if user_signed_in? %>
-              <li class="pull-right"><%= link_to "Sign out", destroy_user_session_path, method: :delete %></li>
+              <li class="navbar-right"><%= link_to "Sign out", destroy_user_session_path, method: :delete %></li>
             <% else %>
-              <li class="pull-right"><%= link_to "Sign up", new_user_registration_path %></li>
-              <li class="pull-right"><%= link_to "Sign in", new_user_session_path %></li>
+              <li class="navbar-right"><%= link_to "Sign up", new_user_registration_path %></li>
+              <li class="navbar-right"><%= link_to "Sign in", new_user_session_path %></li>
             <% end %>
           </ul>
         </div>
