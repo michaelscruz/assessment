@@ -58,7 +58,7 @@
 
     <div class="container">
       <div class="row">
-        <% if params[:controller] == "static_pages" && params[:action] == "home" %>
+        <% if params[:controller] && params[:action] %>
           <div class="col-lg-12">
             <%= bootstrap_flash %>
             <%= yield %>
