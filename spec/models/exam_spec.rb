@@ -7,6 +7,7 @@
 #  description :text
 #  created_at  :datetime
 #  updated_at  :datetime
+#  account_id  :integer
 #
 
 require 'rails_helper'
@@ -21,6 +22,7 @@ RSpec.describe Exam, type: :model do
   it { should respond_to :scores }
   it { should respond_to :users }
   it { should respond_to :reports }
+  it { should respond_to :account }
 
   it { should be_valid }
 
@@ -53,6 +55,7 @@ RSpec.describe Exam, type: :model do
       score = FactoryGirl.create :score
       exam.scores << score
       score.save!
+      @users_count = User.all.count
     end
 
     it "should have one score" do
@@ -71,7 +74,7 @@ RSpec.describe Exam, type: :model do
       end
 
       it "should not destroy the actual user" do
-        expect(User.all.count).to be 1
+        expect(User.all.count).to eq @users_count 
       end
     end
 
@@ -83,7 +86,7 @@ RSpec.describe Exam, type: :model do
       end
 
       it "should not destroy the user" do
-        expect(User.all.count).to be 1
+        expect(User.all.count).to eq @users_count 
       end
     end
   end
@@ -106,5 +109,11 @@ RSpec.describe Exam, type: :model do
         expect(Report.all.count).to be 0
       end
     end
+  end
+
+  describe "when account is missing" do
+    before { exam.account = nil }
+
+    it { should_not be_valid }
   end
 end

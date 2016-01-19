@@ -4,6 +4,8 @@
 #
 #  id         :integer          not null, primary key
 #  text       :text
+#  intro      :text
+#  outro      :text
 #  user_id    :integer
 #  exam_id    :integer
 #  created_at :datetime

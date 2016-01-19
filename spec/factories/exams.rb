@@ -7,12 +7,14 @@
 #  description :text
 #  created_at  :datetime
 #  updated_at  :datetime
+#  account_id  :integer
 #
 
 FactoryGirl.define do
   factory :exam do
     sequence(:name) { |n| "Test#{n}" }
     description "Here is the description of this very revealing test."
+    account { FactoryGirl.create :account }
   end
 
 end
