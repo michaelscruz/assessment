@@ -21,6 +21,9 @@ gem 'therubyracer'
 gem 'less-rails'
 gem 'twitter-bootstrap-rails'
 
+# Documentation
+gem 'annotate'
+
 # Spec gems
 group :development, :test do
   gem 'rspec-rails'

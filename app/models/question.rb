@@ -1,3 +1,17 @@
+# == Schema Information
+#
+# Table name: questions
+#
+#  id          :integer          not null, primary key
+#  text        :string(255)
+#  type        :string(255)
+#  long_answer :text
+#  exam_id     :integer
+#  created_at  :datetime
+#  updated_at  :datetime
+#  category_id :integer
+#
+
 class Question < ActiveRecord::Base
   belongs_to :category
   belongs_to :exam

@@ -1,3 +1,14 @@
+# == Schema Information
+#
+# Table name: exams
+#
+#  id          :integer          not null, primary key
+#  name        :string(255)
+#  description :text
+#  created_at  :datetime
+#  updated_at  :datetime
+#
+
 require 'rails_helper'
 
 RSpec.describe Exam, type: :model do
