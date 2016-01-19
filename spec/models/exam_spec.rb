@@ -20,6 +20,7 @@ RSpec.describe Exam, type: :model do
   it { should respond_to "description" }
   it { should respond_to :scores }
   it { should respond_to :users }
+  it { should respond_to :reports }
 
   it { should be_valid }
 
@@ -87,4 +88,23 @@ RSpec.describe Exam, type: :model do
     end
   end
 
+  describe "when it has a report" do
+    before do
+      report = FactoryGirl.create :report
+      exam.reports << report
+      report.save!
+    end
+
+    it "should have one report" do
+      expect(exam.reports.count).to be 1
+    end
+
+    describe "when the exam is destroyed" do
+      before { exam.destroy }
+
+      it "should not leave the report in the database" do
+        expect(Report.all.count).to be 0
+      end
+    end
+  end
 end

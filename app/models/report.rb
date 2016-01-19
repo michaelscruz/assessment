@@ -13,4 +13,6 @@
 class Report < ActiveRecord::Base
   belongs_to :user
   belongs_to :exam
+
+  validates_presence_of :user, :exam
 end

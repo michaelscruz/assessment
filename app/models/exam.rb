@@ -15,4 +15,5 @@ class Exam < ActiveRecord::Base
 
   has_many :scores, dependent: :destroy
   has_many :users, through: :scores
+  has_many :reports, dependent: :destroy
 end

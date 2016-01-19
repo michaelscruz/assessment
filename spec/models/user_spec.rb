@@ -33,6 +33,7 @@ RSpec.describe User, type: :model do
   it { should respond_to :password_confirmation }
   it { should respond_to :scores }
   it { should respond_to :exams }
+  it { should respond_to :reports }
 
   it { should be_valid }
 
@@ -68,6 +69,7 @@ RSpec.describe User, type: :model do
     before do
       score = FactoryGirl.create :score
       user.scores << score
+      score.save!
     end
 
     it "should have one score" do
@@ -99,6 +101,26 @@ RSpec.describe User, type: :model do
       
       it "should not destroy the exam" do
         expect(Exam.all.count).to be 1
+      end
+    end
+  end
+  
+  describe "with a report" do
+    before do
+      report = FactoryGirl.create :report
+      user.reports << report
+      report.save!
+    end
+
+    it "should have one report" do
+      expect(user.reports.count).to be 1
+    end
+
+    describe "after deleting the user" do
+      before { user.destroy }
+
+      it "should have no reports in the database" do
+        expect(Report.all.count).to be 0
       end
     end
   end

@@ -12,17 +12,8 @@
 #
 
 class Score < ActiveRecord::Base
-  after_initialize :default_values
-
   belongs_to :exam
   belongs_to :user
 
   validates_presence_of :exam, :user
-
-  private
-    
-    def default_values
-      self.score = 0
-      self.questions_answered = 0
-    end
 end
