@@ -10,6 +10,10 @@ RSpec.describe Question, type: :model do
   it { should respond_to :long_answer }
   it { should respond_to :exam }
   it { should respond_to :answers }
+  it { should respond_to :category }
+  it { should respond_to :multiple_choice? }
+  it { should respond_to :long_answer? }
+  it { should respond_to :has_category? }
 
   it { should be_valid }
 
@@ -35,4 +39,30 @@ RSpec.describe Question, type: :model do
 
   end
 
+  describe "when type is multiple_choice" do
+
+    context "and category is blank" do
+      before { question.category = nil }
+      
+      it { should_not be_valid }
+    end
+
+    context "and category is not blank" do
+      it { should be_valid }
+    end
+  end
+
+  describe "when type is long_answer" do
+    before { question.type = "long_answer" }
+
+    context "and category is blank" do
+      before { question.category = nil }
+
+      it { should be_valid }
+    end
+
+    context "and category is not blank" do
+      it { should be_valid }
+    end
+  end
 end

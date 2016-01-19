@@ -4,6 +4,7 @@ FactoryGirl.define do
     type "multiple_choice"
     long_answer nil
     exam { FactoryGirl.create(:exam) }
+    category { FactoryGirl.create(:category) }
   end
 
 end
