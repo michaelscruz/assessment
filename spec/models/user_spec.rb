@@ -31,6 +31,8 @@ RSpec.describe User, type: :model do
   it { should respond_to :email }
   it { should respond_to :password }
   it { should respond_to :password_confirmation }
+  it { should respond_to :scores }
+  it { should respond_to :exams }
 
   it { should be_valid }
 
@@ -62,4 +64,34 @@ RSpec.describe User, type: :model do
     it { should_not be_valid }
   end
   
+  describe "with a score" do
+    before do
+      score = FactoryGirl.create :score
+      user.scores << score
+    end
+
+    it "should have one score" do
+      expect(user.scores.count).to be 1
+    end
+
+    it "should have an exam" do
+      expect(user.exams.count).to be 1
+    end
+
+    describe "after deleting the score" do
+      before { user.scores.first.destroy }
+
+      it "should not have any exams" do
+        expect(user.exams.count).to be 0
+      end
+    end
+
+    describe "after deleting the user" do
+      before { user.destroy }
+
+      it "should have no scores in the database" do
+        expect(Score.all.count).to be 0
+      end
+    end
+  end
 end

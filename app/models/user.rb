@@ -25,5 +25,8 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
+  has_many :scores, dependent: :destroy
+  has_many :exams, through: :scores
+
   validates_presence_of :first_name, :last_name
 end
