@@ -13,5 +13,25 @@
 require 'rails_helper'
 
 RSpec.describe CategoryReport, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+  let(:category_report) { FactoryGirl.create :category_report }
+
+  subject { category_report }
+
+  it { should respond_to :category }
+  it { should respond_to :text }
+  it { should respond_to :value_key }
+
+  it { should be_valid }
+
+  describe "without text" do
+    before { category_report.text = " " }
+
+    it { should_not be_valid }
+  end
+
+  describe "without category" do
+    before { category_report.category = nil }
+
+    it { should_not be_valid }
+  end
 end
