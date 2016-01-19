@@ -64,6 +64,8 @@ ActiveRecord::Schema.define(version: 20160119201955) do
 
   create_table "reports", force: true do |t|
     t.text     "text"
+    t.text     "intro"
+    t.text     "outro"
     t.integer  "user_id"
     t.integer  "exam_id"
     t.datetime "created_at"
