@@ -1,9 +1,9 @@
 FactoryGirl.define do
   factory :question do
-    text "MyString"
-type ""
-long_answer "MyText"
-exam nil
+    sequence(:text) { |n| "What is #{n} + #{n}?" } 
+    type "multiple_choice"
+    long_answer nil
+    exam { FactoryGirl.create(:exam) }
   end
 
 end
