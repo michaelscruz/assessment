@@ -18,6 +18,8 @@ RSpec.describe Exam, type: :model do
 
   it { should respond_to "name" }
   it { should respond_to "description" }
+  it { should respond_to :scores }
+  it { should respond_to :users }
 
   it { should be_valid }
 
@@ -43,6 +45,46 @@ RSpec.describe Exam, type: :model do
     before { exam.description = " " }
 
     it { should_not be_valid }
+  end
+
+  describe "when it has a score" do
+    before do
+      score = FactoryGirl.create :score
+      exam.scores << score
+      score.save!
+    end
+
+    it "should have one score" do
+      expect(exam.scores.count).to be 1
+    end
+
+    it "should have one user" do
+      expect(exam.users.count).to be 1
+    end
+
+    describe "when the score is destroyed" do
+      before { exam.scores.first.destroy }
+
+      it "should not have any users" do
+        expect(exam.users.count).to be 0
+      end
+
+      it "should not destroy the actual user" do
+        expect(User.all.count).to be 1
+      end
+    end
+
+    describe "when the exam is destroyed" do
+      before { exam.destroy }
+
+      it "should not find a score in the database" do
+        expect(Score.all.count).to be 0
+      end
+
+      it "should not destroy the user" do
+        expect(User.all.count).to be 1
+      end
+    end
   end
 
 end

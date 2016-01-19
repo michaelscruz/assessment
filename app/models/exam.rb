@@ -12,4 +12,7 @@
 class Exam < ActiveRecord::Base
   validates :name, presence: true, length: { in: 4..50 }
   validates :description, :presence => true
+
+  has_many :scores, dependent: :destroy
+  has_many :users, through: :scores
 end

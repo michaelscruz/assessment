@@ -84,6 +84,10 @@ RSpec.describe User, type: :model do
       it "should not have any exams" do
         expect(user.exams.count).to be 0
       end
+      
+      it "should not destroy the exam itself" do
+        expect(Exam.all.count).to be 1
+      end
     end
 
     describe "after deleting the user" do
@@ -91,6 +95,10 @@ RSpec.describe User, type: :model do
 
       it "should have no scores in the database" do
         expect(Score.all.count).to be 0
+      end
+      
+      it "should not destroy the exam" do
+        expect(Exam.all.count).to be 1
       end
     end
   end
