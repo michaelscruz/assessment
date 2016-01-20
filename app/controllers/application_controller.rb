@@ -3,7 +3,7 @@ class ApplicationController < ActionController::Base
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
 
-  before_action :set_account
+  # before_action :set_account
 
   def set_account
     redirect_to "http://oakrootassessments.com" if request.domain == "oakroot.net"
