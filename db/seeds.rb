@@ -37,13 +37,23 @@ else
   puts "Created #{exam.name}."
 end
 
-question_1 = Question.new(text: "What is your favorite number?", question_type: "multiple_choice", exam: exam)
+category = Category.new(name: "Numbers", exam: exam)
+existing_category = Category.where(name: category.name, exam: exam).first
+unless existing_category
+  category.save!
+  puts "Creating category #{category.name}."
+else
+  category = existing_category
+  puts "Category already exists."
+end
+
+question_1 = Question.new(text: "What is your favorite number?", question_type: "multiple_choice", exam: exam, category: category)
 existing_question_1 = Question.where(exam: exam, text: question_1.text).first
 unless existing_question_1
   question_1.save!
   puts "Saving question_1."
 else
-  question_1 = existing_question
+  question_1 = existing_question_1
   puts "Question already exists."
 end
 
@@ -77,13 +87,13 @@ else
   puts "Answer already exists."
 end
 
-question_2 = Question.new(text: "What is your next favorite number?", question_type: "multiple_choice", exam: exam)
+question_2 = Question.new(text: "What is your next favorite number?", question_type: "multiple_choice", exam: exam, category: category)
 existing_question_2 = Question.where(exam: exam, text: question_2.text).first
 unless existing_question_2
   question_2.save!
   puts "Saving question_2."
 else
-  question_2 = existing_question
+  question_2 = existing_question_2
   puts "Question already exists."
 end
 
