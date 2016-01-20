@@ -19,11 +19,18 @@ RSpec.describe Category, type: :model do
   it { should respond_to :name }
   it { should respond_to :questions }
   it { should respond_to :category_reports }
+  it { should respond_to :exam }
 
   it { should be_valid }
 
   describe "when name is blank" do
     before { category.name = " " }
+
+    it { should_not be_valid }
+  end
+
+  describe "when exam is missing" do
+    before { category.exam = nil }
 
     it { should_not be_valid }
   end
