@@ -26,10 +26,10 @@ else
   puts "#{account.name} account already exists."
 end
 
-exam = Exam.new(account: account, name: "Sample Test", description: "This is a sample test. " * 20, type: "multiple_choice")
+exam = Exam.new(account: account, name: "Sample Test", description: "This is a sample test. " * 20, exam_type: "multiple_choice")
 existing_exam = Exam.where(account: account, name: exam.name).first
 if existing_exam
-  existing_exam.update!(exam.attributes.reject { |k, v| v.blank? } )
+  existing_exam.update_attributes(exam.attributes.reject { |k, v| v.blank? } )
   exam = existing_exam
   puts "Updated #{exam.name}."
 else
@@ -37,7 +37,7 @@ else
   puts "Created #{exam.name}."
 end
 
-question_1 = Question.new("What is your favorite number?", type: "multiple_choice", exam: exam)
+question_1 = Question.new(text: "What is your favorite number?", question_type: "multiple_choice", exam: exam)
 existing_question_1 = Question.where(exam: exam, text: question_1.text).first
 unless existing_question_1
   question_1.save!
@@ -77,7 +77,7 @@ else
   puts "Answer already exists."
 end
 
-question_2 = Question.new("What is your next favorite number?", type: "multiple_choice", exam: exam)
+question_2 = Question.new(text: "What is your next favorite number?", question_type: "multiple_choice", exam: exam)
 existing_question_2 = Question.where(exam: exam, text: question_2.text).first
 unless existing_question_2
   question_2.save!
