@@ -8,7 +8,7 @@
 #  created_at  :datetime
 #  updated_at  :datetime
 #  account_id  :integer
-#  type        :string(255)
+#  exam_type   :string(255)
 #
 
 class Exam < ActiveRecord::Base
@@ -20,7 +20,7 @@ class Exam < ActiveRecord::Base
   EXAM_TYPES = ["multiple_choice", "long_answer", "mixed"]
 
   validates_presence_of :account
-  validates :type, presence: true, inclusion: { in: EXAM_TYPES }
+  validates :exam_type, presence: true, inclusion: { in: EXAM_TYPES }
   validates :name, presence: true, length: { in: 4..50 }
   validates :description, :presence => true
 end

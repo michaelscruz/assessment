@@ -2,14 +2,14 @@
 #
 # Table name: questions
 #
-#  id          :integer          not null, primary key
-#  text        :string(255)
-#  type        :string(255)
-#  long_answer :text
-#  exam_id     :integer
-#  created_at  :datetime
-#  updated_at  :datetime
-#  category_id :integer
+#  id            :integer          not null, primary key
+#  text          :string(255)
+#  question_type :string(255)
+#  long_answer   :text
+#  exam_id       :integer
+#  created_at    :datetime
+#  updated_at    :datetime
+#  category_id   :integer
 #
 
 class Question < ActiveRecord::Base
@@ -19,11 +19,11 @@ class Question < ActiveRecord::Base
   
   QUESTION_TYPES = ["multiple_choice", "long_answer"]
   validates_presence_of :exam
-  validates :type, presence: true, inclusion: { in: QUESTION_TYPES }
+  validates :question_type, presence: true, inclusion: { in: QUESTION_TYPES }
   validates_presence_of :category, if: :multiple_choice?
 
   def multiple_choice?
-    self.type == "multiple_choice"
+    self.question_type == "multiple_choice"
   end
 
   def has_category?

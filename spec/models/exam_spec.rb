@@ -8,7 +8,7 @@
 #  created_at  :datetime
 #  updated_at  :datetime
 #  account_id  :integer
-#  type        :string(255)
+#  exam_type   :string(255)
 #
 
 require 'rails_helper'
@@ -24,7 +24,7 @@ RSpec.describe Exam, type: :model do
   it { should respond_to :users }
   it { should respond_to :reports }
   it { should respond_to :account }
-  it { should respond_to :type }
+  it { should respond_to :exam_type }
 
   it { should be_valid }
 
@@ -52,14 +52,14 @@ RSpec.describe Exam, type: :model do
     it { should_not be_valid }
   end
 
-  describe "when type is missing" do 
-    before { exam.type = " " }
+  describe "when exam_type is missing" do 
+    before { exam.exam_type = " " }
 
     it { should_not be_valid }
   end
 
-  describe "when type is not within EXAM_TYPES" do
-    before { exam.type = "multiple_guess" }
+  describe "when exam_type is not within EXAM_TYPES" do
+    before { exam.exam_type = "multiple_guess" }
 
     it { should_not be_valid }
     end

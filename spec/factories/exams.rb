@@ -8,7 +8,7 @@
 #  created_at  :datetime
 #  updated_at  :datetime
 #  account_id  :integer
-#  type        :string(255)
+#  exam_type   :string(255)
 #
 
 FactoryGirl.define do
@@ -16,7 +16,7 @@ FactoryGirl.define do
     sequence(:name) { |n| "Test#{n}" }
     description "Here is the description of this very revealing test."
     account { FactoryGirl.create :account }
-    type { "multiple_choice" }
+    exam_type { "multiple_choice" }
   end
 
 end
