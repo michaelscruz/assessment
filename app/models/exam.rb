@@ -8,6 +8,7 @@
 #  created_at  :datetime
 #  updated_at  :datetime
 #  account_id  :integer
+#  type        :string(255)
 #
 
 class Exam < ActiveRecord::Base

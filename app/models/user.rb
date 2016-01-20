@@ -30,4 +30,13 @@ class User < ActiveRecord::Base
   has_many :reports, dependent: :destroy
 
   validates_presence_of :first_name, :last_name
+
+  def full_name
+    [self.first_name, self.last_name].join(' ')
+  end
+
+  def full_name_reverse
+    [self.last_name, self.first_name].join(', ')
+  end
+
 end

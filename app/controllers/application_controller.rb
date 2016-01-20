@@ -9,9 +9,14 @@ class ApplicationController < ActionController::Base
     redirect_to "http://oakrootassessments.com" if request.domain == "oakroot.net"
 
     if request.subdomain.in? ["assessment", "www"]
-      @account = nil
+      @current_account = nil
     else
-      @account = Account.find_by_subdomain(request.subdomain)
+      @current_account = Account.find_by_subdomain(request.subdomain)
     end
   end
+
+  def current_account
+    @current_account ||= Account.find_by_subdomain(request.subdomain)
+  end
+  helper_method :current_account
 end

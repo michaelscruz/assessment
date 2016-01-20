@@ -8,6 +8,7 @@
 #  created_at  :datetime
 #  updated_at  :datetime
 #  account_id  :integer
+#  type        :string(255)
 #
 
 require 'rails_helper'
@@ -23,6 +24,7 @@ RSpec.describe Exam, type: :model do
   it { should respond_to :users }
   it { should respond_to :reports }
   it { should respond_to :account }
+  it { should respond_to :type }
 
   it { should be_valid }
 
