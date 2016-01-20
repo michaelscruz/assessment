@@ -16,6 +16,7 @@ FactoryGirl.define do
     sequence(:name) { |n| "Test#{n}" }
     description "Here is the description of this very revealing test."
     account { FactoryGirl.create :account }
+    type { "multiple_choice" }
   end
 
 end

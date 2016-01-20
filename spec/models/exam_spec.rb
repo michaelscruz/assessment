@@ -52,6 +52,18 @@ RSpec.describe Exam, type: :model do
     it { should_not be_valid }
   end
 
+  describe "when type is missing" do 
+    before { exam.type = " " }
+
+    it { should_not be_valid }
+  end
+
+  describe "when type is not within EXAM_TYPES" do
+    before { exam.type = "multiple_guess" }
+
+    it { should_not be_valid }
+    end
+
   describe "when it has a score" do
     before do
       score = FactoryGirl.create :score
