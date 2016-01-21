@@ -59,6 +59,7 @@
                     <span class="caret"></span>
                   </a>
                   <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                    <li><%= link_to "Home", user_path(current_user) %></li>
                     <li><%= link_to "Edit profile", edit_user_registration_path %></li>
                     <li><%= link_to "My tests", "#" %></li>
                     <li role="separator" class="divider"></li>

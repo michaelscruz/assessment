@@ -60,11 +60,25 @@ RSpec.describe "UsersPages", type: :feature do
       end
     end
 
-    scenario "signing in should take user to their show page" do
+    context "signing in" do
       user = FactoryGirl.create :user 
       sign_in_test_user(user)
+      
+      scenario "should take user to their show page" do
+        expect(page).to have_title user.full_name
+      end
 
-      expect(page).to have_title user.full_name
+      scenario "clicking 'Take a test' should take user to tests index" do
+      end
+
+      scenario "clicking 'Create a test' should take user to new account page" do
+      end
+
+      context "creating an account" do
+        scenario "should take user to new test page" do
+        end
+      end
+
     end
   end
 end

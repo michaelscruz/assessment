@@ -38,4 +38,5 @@
 .jumbotron {
   background-image: url(book.jpg);
   background-size: cover;
+  background-position: center center;
 }
