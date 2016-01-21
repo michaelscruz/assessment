@@ -19,4 +19,8 @@ class ApplicationController < ActionController::Base
     @current_account ||= Account.find_by_subdomain(request.subdomain)
   end
   helper_method :current_account
+
+  def after_sign_in_path_for(resource)
+    user_path(resource)
+  end
 end

@@ -23,7 +23,7 @@ RSpec.describe "UserPages", type: :request do
       end
 
       it { should have_content "Welcome! You have signed up successfully." }
-      it { should have_title "Bob Bobbinsly" }
+      it { should have_title "Bob Bobbingsly" }
     end
   end
 end
