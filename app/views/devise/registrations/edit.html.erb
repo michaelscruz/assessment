@@ -1,3 +1,4 @@
+<%= provide(:title, "Edit profile") %>
 <div class="row">
   <div class="well col-sm-6 col-md-offset-2">
     <h2>Edit <%= resource_name.to_s.humanize %></h2>
@@ -48,9 +49,11 @@
   <div class="col-sm-3">
     <div class="well sidebar-nav">
       <h3>Don't want to edit?</h3>
-      <%= button_to "Back", :back, class: "btn btn-lg btn-default col-xs-12" %>
+      <%= link_to "Back", :back, class: "btn btn-lg btn-default col-xs-12" %>
+      <br><br>
       <h3>Not Satisfied?</h3>
       <%= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete, class: "btn btn-lg btn-danger col-sm-12" %>
+      <br><br>
     </div>
   </div>
 </div>

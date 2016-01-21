@@ -45,7 +45,11 @@ RSpec.describe "UsersPages", type: :feature do
         end
 
         scenario "clicking profile and edit profile should take user to registrations edit page" do
-          click_link "Profile"
+          click_link "Bob Bobbingsly"
+          click_link "Edit profile"
+
+          expect(page).to have_title "Edit profile"
+        end
 
         scenario "signing out" do
           click_link "Sign out"
