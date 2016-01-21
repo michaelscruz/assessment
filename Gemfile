@@ -27,6 +27,7 @@ gem 'annotate'
 # Spec gems
 group :development, :test do
   gem 'rspec-rails'
+  gem 'selenium-webdriver'
   gem 'factory_girl_rails'
   gem 'capybara'
   gem 'database_cleaner'
