@@ -8,4 +8,8 @@ module ApplicationHelper
       "#{base_title} | #{page_title}"
     end
   end
+
+  def sign_in_user(user)
+    sign_in(user)
+  end
 end

@@ -52,7 +52,19 @@
             <li><%= link_to "Link2", "/path2"  %></li>
             <li><%= link_to "Link3", "/path3"  %></li>
             <% if user_signed_in? %>
-              <li class="navbar-right"><%= link_to "Sign out", destroy_user_session_path, method: :delete %></li>
+             
+                <li class="dropdown pull-right">
+                  <a href="#" class="dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                    <%= current_user.full_name %>
+                    <span class="caret"></span>
+                  </a>
+                  <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                    <li><%= link_to "Edit profile", edit_user_registration_path %></li>
+                    <li><%= link_to "My tests", "#" %></li>
+                    <li role="separator" class="divider"></li>
+                    <li><%= link_to "Sign out", destroy_user_session_path, method: :delete %></li>
+                  </ul>
+                </li>
             <% else %>
               <li class="navbar-right"><%= link_to "Sign up", new_user_registration_path %></li>
               <li class="navbar-right"><%= link_to "Sign in", new_user_session_path %></li>

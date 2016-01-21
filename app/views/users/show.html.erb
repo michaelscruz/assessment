@@ -1,5 +1,33 @@
 <%= provide(:title, @user.full_name) %>
-<p id="notice"><%= notice %></p>
 
-<%= link_to 'Edit', edit_user_registration_path %> |
-<%= link_to 'Tests', '#' %>
+<div class="jumbotron no-padding">
+  <div class="container">
+    <h1>Welcome, <%= @user.first_name %></h1>
+  </div>
+</div>
+
+<hr class="featurette-divider">
+
+<div class="row featurette">
+  <div class="col-md-7 feature-text">
+    <h2 class="featurette-heading">Browse our tests. <span class="text-muted">Discover yourself.</span></h2>
+    <p class="lead">We have many varieties of tests from which to choose. You can have a little fun, or get to know some of your inner workings just a little bit better. You can also get to know your friends, colleagues and employees better by sending them tests.</p>
+    <p><%= link_to "Take a test", "#", class: "btn btn-lg btn-primary" %></p>
+  </div>
+  <div class="col-md-5">
+    <%= image_tag "test.jpg", class: "featurette-image img-responsive center-block" %>
+  </div>
+</div>
+
+<hr class="featurette-divider">
+
+<div class="row featurette">
+  <div class="col-md-7 col-md-push-5 feature-text">
+    <h2 class="featurette-heading">Build your own test <span class="text-muted">for others to take.</span></h2>
+    <p class="lead">If you don't already have any tests of your own, this will create a subdomain just for you and your tests. Then you can pass along a url to clients, customers, employees or anyone else, that has YOUR name (or your company's name) built in. Soon to come: customizing your own space with a logo, etc.</p>
+    <p><%= link_to "Create a test", "#", class: "btn btn-lg btn-primary" %></p>
+  </div>
+  <div class="col-md-5 col-md-pull-7">
+    <%= image_tag "construction.jpg", class: "featurette-image img-responsive center-block" %>
+  </div>
+</div>
