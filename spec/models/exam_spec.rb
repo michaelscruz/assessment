@@ -161,5 +161,13 @@ RSpec.describe Exam, type: :model do
         expect(exam.answers.count).to eq 6
       end
     end
+
+    describe "when the exam is destroyed" do
+      before { exam.destroy }
+
+      it "should not leave questions in the database" do
+        expect(Question.all.count).to eq 0
+      end
+    end
   end
 end
