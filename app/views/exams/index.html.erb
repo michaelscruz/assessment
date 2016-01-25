@@ -19,7 +19,7 @@
     <% @exams.each do |exam| %>
       <tr>
         <td><%= link_to exam.name, exam %></td>
-        <td><%= exam.description %></td>
+        <td><%= truncate(exam.description, length: 250) %> <%= link_to "more", exam %></td>
       </tr>
     <% end %>
   </tbody>
