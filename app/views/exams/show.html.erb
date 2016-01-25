@@ -1,4 +1,14 @@
 <p id="notice"><%= notice %></p>
 
-<%= link_to 'Edit', edit_exam_path(@exam) %> |
+<table class="table">
+  <thead>
+    <th class="col-md-12">
+      <%= @exam.name %>
+    </th>
+  </thead>
+  <tbody>
+    <td><%= @exam.description %></td>
+  </tbody>
+</table>
+
 <%= link_to 'Back', exams_path %>
