@@ -25,6 +25,8 @@ RSpec.describe Exam, type: :model do
   it { should respond_to :reports }
   it { should respond_to :account }
   it { should respond_to :exam_type }
+  it { should respond_to :questions }
+  it { should respond_to :answers }
 
   it { should be_valid }
 
@@ -129,5 +131,35 @@ RSpec.describe Exam, type: :model do
     before { exam.account = nil }
 
     it { should_not be_valid }
+  end
+
+  describe "when it has questions" do
+    before do
+      3.times do 
+        exam.questions << FactoryGirl.create(:question)
+      end
+    end
+
+    it "should have three questions" do
+      expect(exam.questions.count).to eq 3
+    end
+
+    it "should have no answers" do
+      expect(exam.answers.count).to eq 0
+    end
+
+    describe "when each question has two answers" do 
+      before do
+        exam.questions.each do |question|
+          2.times do 
+            question.answers << FactoryGirl.create(:answer)
+          end
+        end
+      end
+
+      it "should have 6 answers" do
+        expect(exam.answers.count).to eq 6
+      end
+    end
   end
 end
