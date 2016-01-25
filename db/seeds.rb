@@ -26,105 +26,98 @@ else
   puts "#{account.name} account already exists."
 end
 
-exam = Exam.new(account: account, name: "Sample Test", description: "This is a sample test. " * 20, exam_type: "multiple_choice")
-existing_exam = Exam.where(account: account, name: exam.name).first
-if existing_exam
-  existing_exam.update_attributes(exam.attributes.reject { |k, v| v.blank? } )
-  exam = existing_exam
-  puts "Updated #{exam.name}."
-else
+5.times do |n|
+  exam = Exam.new(account: account, name: "Sample Test #{n}", description: "This is a sample test. " * 20, exam_type: "multiple_choice")
   exam.save!
   puts "Created #{exam.name}."
+
+  category = Category.new(name: "Numbers", exam: exam)
+  existing_category = Category.where(name: category.name, exam: exam).first
+  unless existing_category
+    category.save!
+    puts "Creating category #{category.name}."
+  else
+    category = existing_category
+    puts "Category already exists."
+  end
+
+  question_1 = Question.new(text: "What is your favorite number?", question_type: "multiple_choice", exam: exam, category: category)
+  existing_question_1 = Question.where(exam: exam, text: question_1.text).first
+  unless existing_question_1
+    question_1.save!
+    puts "Saving question_1."
+  else
+    question_1 = existing_question_1
+    puts "Question already exists."
+  end
+
+  answer_1_q1 = Answer.new(text: "Zero", value: 0, question: question_1)
+  existing_answer_1_q1 = Answer.where(value: answer_1_q1.value, question: question_1).first
+  unless existing_answer_1_q1
+    answer_1_q1.save!
+    puts "Saving first answer to first question."
+  else
+    answer_1_q1 = existing_answer_1_q1
+    puts "Answer already exists."
+  end
+
+  answer_2_q1 = Answer.new(text: "One", value: 1, question: question_1)
+  existing_answer_2_q1 = Answer.where(value: answer_2_q1.value, question: question_1).first
+  unless existing_answer_2_q1
+    answer_2_q1.save!
+    puts "Saving second answer to first question."
+  else
+    answer_2_q1 = existing_answer_2_q1
+    puts "Answer already exists."
+  end
+
+  answer_3_q1 = Answer.new(text: "Two", value: 2, question: question_1)
+  existing_answer_3_q1 = Answer.where(value: answer_3_q1.value, question: question_1).first
+  unless existing_answer_3_q1
+    answer_3_q1.save!
+    puts "Saving third answer to first question."
+  else
+    answer_3_q1 = existing_answer_3_q1
+    puts "Answer already exists."
+  end
+
+  question_2 = Question.new(text: "What is your next favorite number?", question_type: "multiple_choice", exam: exam, category: category)
+  existing_question_2 = Question.where(exam: exam, text: question_2.text).first
+  unless existing_question_2
+    question_2.save!
+    puts "Saving question_2."
+  else
+    question_2 = existing_question_2
+    puts "Question already exists."
+  end
+
+  answer_1_q2 = Answer.new(text: "Three", value: 3, question: question_1)
+  existing_answer_1_q2 = Answer.where(value: answer_1_q2.value, question: question_1).first
+  unless existing_answer_1_q2
+    answer_1_q2.save!
+    puts "Saving first answer to first question."
+  else
+    answer_1_q2 = existing_answer_1_q2
+    puts "Answer already exists."
+  end
+
+  answer_2_q2 = Answer.new(text: "Four", value: 4, question: question_1)
+  existing_answer_2_q2 = Answer.where(value: answer_2_q2.value, question: question_1).first
+  unless existing_answer_2_q2
+    answer_2_q2.save!
+    puts "Saving second answer to first question."
+  else
+    answer_2_q2 = existing_answer_2_q2
+    puts "Answer already exists."
+  end
+
+  answer_3_q2 = Answer.new(text: "Five", value: 5, question: question_1)
+  existing_answer_3_q2 = Answer.where(value: answer_3_q2.value, question: question_1).first
+  unless existing_answer_3_q2
+    answer_3_q2.save!
+    puts "Saving third answer to first question."
+  else
+    answer_3_q2 = existing_answer_3_q2
+    puts "Answer already exists."
+  end
 end
-
-category = Category.new(name: "Numbers", exam: exam)
-existing_category = Category.where(name: category.name, exam: exam).first
-unless existing_category
-  category.save!
-  puts "Creating category #{category.name}."
-else
-  category = existing_category
-  puts "Category already exists."
-end
-
-question_1 = Question.new(text: "What is your favorite number?", question_type: "multiple_choice", exam: exam, category: category)
-existing_question_1 = Question.where(exam: exam, text: question_1.text).first
-unless existing_question_1
-  question_1.save!
-  puts "Saving question_1."
-else
-  question_1 = existing_question_1
-  puts "Question already exists."
-end
-
-answer_1_q1 = Answer.new(text: "Zero", value: 0, question: question_1)
-existing_answer_1_q1 = Answer.where(value: answer_1_q1.value, question: question_1).first
-unless existing_answer_1_q1
-  answer_1_q1.save!
-  puts "Saving first answer to first question."
-else
-  answer_1_q1 = existing_answer_1_q1
-  puts "Answer already exists."
-end
-
-answer_2_q1 = Answer.new(text: "One", value: 1, question: question_1)
-existing_answer_2_q1 = Answer.where(value: answer_2_q1.value, question: question_1).first
-unless existing_answer_2_q1
-  answer_2_q1.save!
-  puts "Saving second answer to first question."
-else
-  answer_2_q1 = existing_answer_2_q1
-  puts "Answer already exists."
-end
-
-answer_3_q1 = Answer.new(text: "Two", value: 2, question: question_1)
-existing_answer_3_q1 = Answer.where(value: answer_3_q1.value, question: question_1).first
-unless existing_answer_3_q1
-  answer_3_q1.save!
-  puts "Saving third answer to first question."
-else
-  answer_3_q1 = existing_answer_3_q1
-  puts "Answer already exists."
-end
-
-question_2 = Question.new(text: "What is your next favorite number?", question_type: "multiple_choice", exam: exam, category: category)
-existing_question_2 = Question.where(exam: exam, text: question_2.text).first
-unless existing_question_2
-  question_2.save!
-  puts "Saving question_2."
-else
-  question_2 = existing_question_2
-  puts "Question already exists."
-end
-
-answer_1_q2 = Answer.new(text: "Three", value: 3, question: question_1)
-existing_answer_1_q2 = Answer.where(value: answer_1_q2.value, question: question_1).first
-unless existing_answer_1_q2
-  answer_1_q2.save!
-  puts "Saving first answer to first question."
-else
-  answer_1_q2 = existing_answer_1_q2
-  puts "Answer already exists."
-end
-
-answer_2_q2 = Answer.new(text: "Four", value: 4, question: question_1)
-existing_answer_2_q2 = Answer.where(value: answer_2_q2.value, question: question_1).first
-unless existing_answer_2_q2
-  answer_2_q2.save!
-  puts "Saving second answer to first question."
-else
-  answer_2_q2 = existing_answer_2_q2
-  puts "Answer already exists."
-end
-
-answer_3_q2 = Answer.new(text: "Five", value: 5, question: question_1)
-existing_answer_3_q2 = Answer.where(value: answer_3_q2.value, question: question_1).first
-unless existing_answer_3_q2
-  answer_3_q2.save!
-  puts "Saving third answer to first question."
-else
-  answer_3_q2 = existing_answer_3_q2
-  puts "Answer already exists."
-end
-
-
