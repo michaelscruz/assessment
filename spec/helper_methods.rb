@@ -21,4 +21,10 @@ module HelperMethods
     fill_in "Password confirmation", with: password_confirmation if password_confirmation
     fill_in "Current password", with: current_password if current_password
   end
+
+  def create_tests(number_of_tests)
+    number_of_tests.times do 
+      FactoryGirl.create :exam
+    end
+  end
 end

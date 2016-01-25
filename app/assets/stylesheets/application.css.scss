@@ -35,8 +35,14 @@
   margin: 0;
 }
 
-.jumbotron {
+.user_home {
   background-image: asset-data-url("book.jpg");
+  background-size: cover;
+  background-position: center center;
+}
+
+.writing {
+  background-image: asset-data-url("writing.jpg");
   background-size: cover;
   background-position: center center;
 }

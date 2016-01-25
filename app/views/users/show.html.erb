@@ -1,6 +1,6 @@
 <%= provide(:title, @user.full_name) %>
 
-<div class="jumbotron no-padding">
+<div class="jumbotron user_home no-padding">
   <div class="container">
     <h1>Welcome, <%= @user.first_name %></h1>
   </div>
@@ -12,7 +12,7 @@
   <div class="col-md-7 feature-text">
     <h2 class="featurette-heading">Browse our tests. <span class="text-muted">Discover yourself.</span></h2>
     <p class="lead">We have many varieties of tests from which to choose. You can have a little fun, or get to know some of your inner workings just a little bit better. You can also get to know your friends, colleagues and employees better by sending them tests.</p>
-    <p><%= link_to "Take a test", "#", class: "btn btn-lg btn-primary" %></p>
+    <p><%= link_to "Take a test", exams_path, class: "btn btn-lg btn-primary" %></p>
   </div>
   <div class="col-md-5">
     <%= image_tag "test.jpg", class: "featurette-image img-responsive center-block" %>
