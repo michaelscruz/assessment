@@ -17,6 +17,8 @@ class Exam < ActiveRecord::Base
   has_many :users, through: :scores
   has_many :reports, dependent: :destroy 
   has_many :categories
+  has_many :questions, dependent: :destroy
+  has_many :answers, through: :questions
   
   EXAM_TYPES = ["multiple_choice", "long_answer", "mixed"]
 

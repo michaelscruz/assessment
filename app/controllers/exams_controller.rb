@@ -1,5 +1,4 @@
 class ExamsController < ApplicationController
-  before_action :set_exam, only: [:show, :edit, :update, :destroy]
 
   # GET /exams
   # GET /exams.json
@@ -10,6 +9,7 @@ class ExamsController < ApplicationController
   # GET /exams/1
   # GET /exams/1.json
   def show
+    @exam = Exam.includes(:questions, :answers).where(id: params[:id]).first
   end
 
   # GET /exams/new
@@ -19,6 +19,7 @@ class ExamsController < ApplicationController
 
   # GET /exams/1/edit
   def edit
+    @exam = Exam.find(params[:id])
   end
 
   # POST /exams
@@ -40,6 +41,7 @@ class ExamsController < ApplicationController
   # PATCH/PUT /exams/1
   # PATCH/PUT /exams/1.json
   def update
+    @exam = Exam.find(params[:id])
     respond_to do |format|
       if @exam.update(exam_params)
         format.html { redirect_to @exam, notice: 'Exam was successfully updated.' }
@@ -54,6 +56,7 @@ class ExamsController < ApplicationController
   # DELETE /exams/1
   # DELETE /exams/1.json
   def destroy
+    @exam = Exam.find(params[:id])
     @exam.destroy
     respond_to do |format|
       format.html { redirect_to exams_url, notice: 'Exam was successfully destroyed.' }
@@ -62,10 +65,6 @@ class ExamsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_exam
-      @exam = Exam.find(params[:id])
-    end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def exam_params
