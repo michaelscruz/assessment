@@ -34,6 +34,7 @@ RSpec.describe User, type: :model do
   it { should respond_to :scores }
   it { should respond_to :exams }
   it { should respond_to :reports }
+  it { should respond_to :account }
 
   it { should be_valid }
 
@@ -121,6 +122,24 @@ RSpec.describe User, type: :model do
 
       it "should have no reports in the database" do
         expect(Report.all.count).to be 0
+      end
+    end
+  end
+
+  describe "with an account" do
+    before do
+      @account = FactoryGirl.create(:account, user: user)
+    end
+
+    it "should have @account as its account" do
+      expect(user.account).to be @account
+    end
+
+    describe "destroying the user" do
+      before { user.destroy }
+
+      it "should destroy the account also" do
+        expect(Account.find_by(id: @account.id)).to be nil
       end
     end
   end
