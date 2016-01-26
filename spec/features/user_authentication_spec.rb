@@ -60,12 +60,25 @@ RSpec.describe "UsersPages", type: :feature do
       end
     end
 
+    context "clicking 'Create an account' from the home page" do
+      before do
+        visit root_url
+        click_link "Create an account"
+      end
+
+      scenario "should take visitor to the test creation page" do
+        expect(page).to have_title "Sign up"
+      end
+    end
+
     context "signing in" do
-      user = FactoryGirl.create :user 
-      sign_in_test_user(user)
+      before do 
+        @user = FactoryGirl.create :user 
+        sign_in_test_user(@user)
+      end
       
       scenario "should take user to their show page" do
-        expect(page).to have_title user.full_name
+        expect(page).to have_title @user.full_name
       end
 
       scenario "clicking 'Take a test' should take user to tests index" do
