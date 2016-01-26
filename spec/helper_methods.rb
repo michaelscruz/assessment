@@ -1,9 +1,9 @@
+require 'rails_helper'
 include ApplicationHelper
 
 module HelperMethods
   def sign_in_test_user(user, options={})
     if options[:no_capybara]
-      sign_in_user(user)
     else
       visit root_url
       click_link "Sign in"
@@ -20,8 +20,8 @@ module HelperMethods
       account = Account.create!(name: user.full_name, subdomain: user.first_name + "_" + user.last_name, user: user)
       user.account = account
     end
-    
-    sign_in_test_user(user)
+
+    sign_in_test_user(user, options)
     user
   end
 

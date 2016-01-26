@@ -6,7 +6,7 @@
 <div class="row">
   <div class="well col-sm-8 col-md-offset-2">
 
-    <h2>Question #<%= @exam.questions.length %></h2>
+    <h2>Question #<%= @exam.questions.length + 1 %></h2>
 
     <%= form_for([@exam, @question]) do |f| %>
 
@@ -16,12 +16,25 @@
       </div>
 
       <% if @exam.includes_multiple_choice? %>
-        <%= render 'multiple_choice' %>
+        <hr>
+        <div id="answers">
+
+          <%= f.fields_for :answers do |answer| %>
+            <%= render 'answer_fields', f: answer %>
+          <% end %>
+
+          <div class="links break">
+            <%= link_to_add_association "Add answer", f, :answers %>
+          </div>
+
+        </div>
       <% end %>
 
+      <hr>
+
       <div class="actions">
-        <%= submit_tag "Next question", class: "btn btn-lg btn-success col-xs-6" %>
-        <%= submit_tag "Finalize test", final_question: true, data: { confirm: "Are you sure? This will finish adding questions to your test." }, class: "btn btn-lg btn-success col-xs-6" %> 
+        <%= submit_tag "Next question", class: "btn btn-lg btn-success col-xs-5 no-left-padding" %>
+        <%= submit_tag "Finalize test", data: { confirm: "Are you sure? This will finish adding questions to your test." }, class: "btn btn-lg btn-primary col-xs-5 pull-right no-right-padding" %> 
       </div>
     <% end %>
   </div>

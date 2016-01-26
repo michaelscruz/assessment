@@ -1,13 +1,14 @@
-<div class="nested-fields">
-  <div class="field form-group">
+<div class="nested-fields break answer">
+  <div class="field form-group col-sm-10 no-left-padding">
     <%= f.label :text, "Answer text" %>
     <%= f.text_field :text, autofocus: true, class: "form-control" %>
   </div>
 
-  <div class="field form-group">
+  <div class="field form-group col-sm-2 no-right-padding">
     <%= f.label :value, "Answer value" %>
     <%= f.number_field :value, autofocus: true, class: "form-control" %>
   </div>
-
-  <%= link_to_remove_association "remove answer", f %>
+  <div class="pull-right">
+    <%= link_to_remove_association "remove above answer", f %>
+  </div>
 </div>

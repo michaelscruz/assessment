@@ -13,5 +13,5 @@
 class Answer < ActiveRecord::Base
   belongs_to :question
 
-  validates_presence_of :text, :value, :question
+  validates_presence_of :text, :value
 end

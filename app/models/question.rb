@@ -22,7 +22,7 @@ class Question < ActiveRecord::Base
   QUESTION_TYPES = ["multiple_choice", "long_answer"]
   validates_presence_of :exam
   validates :question_type, presence: true, inclusion: { in: QUESTION_TYPES }
-  validates_presence_of :category, if: :multiple_choice?
+  #validates_presence_of :category, if: :multiple_choice?
 
   def multiple_choice?
     self.question_type == "multiple_choice"

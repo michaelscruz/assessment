@@ -33,9 +33,10 @@ RSpec.describe "CreatingTests", type: :feature do
     end
   end
 
-  feature "Creating a new test with an existing account" do 
+  feature "Creating a new test with an existing account", js: true do
     before do
-      @user = create_signed_in_user(account: true)
+      @user = create_signed_in_user(account: true, no_capybara: true)
+      visit user_path(@user)
       click_link "Create a test"
     end
 
@@ -53,6 +54,46 @@ RSpec.describe "CreatingTests", type: :feature do
 
       scenario "should lead to a nex question form" do
         expect(page).to have_title "New Question"
+      end
+
+      context "Adding an answer" do
+        before { click_link "Add answer" }
+
+        scenario "should bring up an answer form" do
+          expect(page).to have_field "Answer text"
+          expect(page).to have_field "Answer value"
+          expect(page).to have_link "remove answer"
+        end
+
+        context "filling in the answer" do
+          before do
+            fill_in "Question text", with: "Here is my first question"
+            fill_in "Answer text", with: "First option"
+            fill_in "Answer value", with: 3
+          end
+
+          context "clicking Add answer again should add another answer" do 
+            before { click_link "Add answer" }
+
+            scenario "two answers" do
+              expect(page).to have_field("Answer text", count: 2)
+            end
+
+            scenario "clicking next question should bring up a new question form" do
+              click_button "Next question"
+
+              expect(page).to have_title "New Question"
+              expect(page).to have_field "Question text"
+              expect(page).not_to have_field "Answer text"
+            end
+
+            scenario "clicking Finalize test should bring user to test show page" do 
+              click_button "Finalize test"
+
+              expect(page).to have_title "Sample Test"
+            end
+          end
+        end
       end
     end
   end
