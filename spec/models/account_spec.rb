@@ -30,10 +30,45 @@ RSpec.describe Account, type: :model do
     it { should_not be_valid }
   end
 
+  describe "when name is taken" do
+    before do
+      second_account = FactoryGirl.create :account
+      account.name = second_account.name
+    end
+
+    it { should_not be_valid }
+  end
+
   describe "when subdomain is missing" do
     before { account.subdomain = " " }
 
     it { should_not be_valid }
+  end
+
+  describe "subdomain is taken" do
+    before do
+      second_account = FactoryGirl.create :account
+      account.subdomain = second_account.subdomain
+    end
+
+    it { should_not be_valid }
+  end
+
+  describe "when subdomain contains spaces" do
+    before { account.subdomain = "with spaces " }
+
+    it { should_not be_valid }
+  end
+
+  describe "when created subdomain and searched subdomain are different cases" do
+    before do
+      account.subdomain = "MY_SUBDOMAIN"
+      account.save!
+    end
+
+    it "should not be case sensitive" do
+      expect(Account.find_by(subdomain: "my_subdomain").id).to eq account.id
+    end
   end
 
   describe "when user is missing" do 

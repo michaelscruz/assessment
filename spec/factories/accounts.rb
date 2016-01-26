@@ -12,8 +12,8 @@
 
 FactoryGirl.define do
   factory :account do
-    name "My Account"
-    subdomain "example"
+    sequence(:name) { |n| "Account #{n}" }
+    sequence(:subdomain) { |n| "#{n}subdomain" }
     user { FactoryGirl.create :user }
   end
 
