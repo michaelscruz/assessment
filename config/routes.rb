@@ -4,6 +4,8 @@ Rails.application.routes.draw do
   
   resources :tests, controller: :exams, as: :exams
 
+  resources :accounts, except: [:index, :show]
+
   root 'static_pages#home'
   
   # Static Pages
