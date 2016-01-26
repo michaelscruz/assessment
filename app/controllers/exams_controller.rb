@@ -31,7 +31,7 @@ class ExamsController < ApplicationController
 
     respond_to do |format|
       if @exam.save
-        format.html { redirect_to new_question_path, notice: 'Exam was successfully created.' }
+        format.html { redirect_to new_exam_question_path(@exam), notice: 'Exam was successfully created.' }
         format.json { render :show, status: :created, location: @exam }
       else
         format.html { render :new }

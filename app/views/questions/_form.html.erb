@@ -1,0 +1,32 @@
+<div class="jumbotron writing no-padding">
+  <div class="container">
+  </div>
+</div>
+
+<div class="row">
+  <div class="well col-sm-8 col-md-offset-2">
+
+    <h2>Question #<%= @exam.questions.length %></h2>
+
+    <%= form_for([@exam, @question]) do |f| %>
+
+      <div class="form-group">
+        <%= f.label :text, "Question text" %><br>
+        <%= f.text_field :text, autofocus: true, class: "form-control" %>
+      </div>
+
+      <% if @exam.multiple_choice? %>
+        <%= render 'multiple_choice' %>
+      <% elsif @exam.long_answer? %>
+        <%= render 'long_answer' %>
+      <% else %>
+        <%= render 'mixed' %>
+      <% end %>
+
+      <div class="actions">
+        <%= submit_tag "Next question", class: "btn btn-lg btn-success col-xs-6" %>
+        <%= submit_tag "Finalize test", final_question: true, data: { confirm: "Are you sure? This will finish adding questions to your test." }, class: "btn btn-lg btn-success col-xs-6" %> 
+      </div>
+    <% end %>
+  </div>
+</div>

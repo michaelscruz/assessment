@@ -2,8 +2,9 @@ Rails.application.routes.draw do
   devise_for :users, controllers: { registrations: 'registrations' }
   resources :users, only: :show
   
-  resources :tests, controller: :exams, as: :exams
-  resources :questions, only: [:new, :create]
+  resources :tests, controller: :exams, as: :exams do
+    resources :questions
+  end
 
   resources :accounts, except: [:index, :show]
 
