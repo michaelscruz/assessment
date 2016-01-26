@@ -26,4 +26,13 @@ class Exam < ActiveRecord::Base
   validates :exam_type, presence: true, inclusion: { in: EXAM_TYPES }
   validates :name, presence: true, length: { in: 4..50 }
   validates :description, :presence => true
+
+  def multiple_choice?
+    self.exam_type == "multiple_choice"
+  end
+
+  def long_answer?
+    self.exam_type == "long_answer"
+  end
+
 end
