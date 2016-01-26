@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   resources :users, only: :show
   
   resources :tests, controller: :exams, as: :exams
+  resources :questions, only: [:new, :create]
 
   resources :accounts, except: [:index, :show]
 
