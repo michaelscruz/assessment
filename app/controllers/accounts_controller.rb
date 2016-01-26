@@ -4,6 +4,7 @@ class AccountsController < ApplicationController
 
   def new
     @account = Account.new
+    @creating_test = params[:creating_test] ? true : false
   end
 
   def edit
