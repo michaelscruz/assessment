@@ -15,12 +15,8 @@
         <%= f.text_field :text, autofocus: true, class: "form-control" %>
       </div>
 
-      <% if @exam.multiple_choice? %>
+      <% if @exam.includes_multiple_choice? %>
         <%= render 'multiple_choice' %>
-      <% elsif @exam.long_answer? %>
-        <%= render 'long_answer' %>
-      <% else %>
-        <%= render 'mixed' %>
       <% end %>
 
       <div class="actions">

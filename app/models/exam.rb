@@ -35,4 +35,7 @@ class Exam < ActiveRecord::Base
     self.exam_type == "long_answer"
   end
 
+  def includes_multiple_choice?
+    self.exam_type != "long_answer"
+  end
 end
