@@ -30,10 +30,33 @@ RSpec.describe "CreatingTests", type: :feature do
         expect(page).to have_field "Type of test"
         expect(page).to have_button "Next"
       end
+    end
+  end
 
+  feature "Creating a new test with an existing account" do 
+    before do
+      @user = create_signed_in_user(account: true)
+      click_link "Create a test"
     end
 
-   end
+    scenario "should bring user to new test form" do
+      expect(page).to have_title "Create a Test"
+    end
+
+    context "filling out the form for a new multiple choice test" do 
+      before do 
+        fill_in "Name", with: "Sample Test"
+        fill_in "Description", with: "This is a sample test. " * 50
+        select "Multiple choice", from: "Type of test"
+        click_button "Next"
+      end
+
+      scenario "should lead to a nex question form" do
+        expect(page).to have_title "New Question"
+      end
+    end
+  end
+
       # expect(page).to have_field "First name"
       # expect(page).to have_field "Last name"
       # expect(page).to have_field "Email"

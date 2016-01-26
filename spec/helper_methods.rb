@@ -13,8 +13,14 @@ module HelperMethods
     end
   end
 
-  def create_signed_in_user
+  def create_signed_in_user(options={})
     user = FactoryGirl.create :user
+
+    if options[:account]
+      account = Account.create!(name: user.full_name, subdomain: user.first_name + "_" + user.last_name, user: user)
+      user.account = account
+    end
+    
     sign_in_test_user(user)
     user
   end
