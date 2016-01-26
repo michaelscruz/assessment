@@ -20,6 +20,11 @@
         <%= f.text_area :description, autofocus: true, class: "form-control" %>
       </div>
 
+      <div class="form-group">
+        <%= f.label :exam_type, "Type of test" %><br>
+        <%= f.select :exam_type, options_for_select([["Multiple choice", "multiple_choice"], ["Long answer", "long_answer"], ["Mix of both", "mixed"]], "multiple_choice"), {}, class: "form-control" %>
+      </div>
+
       <div class="actions">
         <%= f.submit "Next", class: "btn btn-success btn-lg col-xs-12" %>
       </div>

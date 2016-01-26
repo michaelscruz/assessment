@@ -14,9 +14,26 @@ RSpec.describe "CreatingTests", type: :feature do
       expect(page).to have_field "Name"
       expect(page).to have_button "Next"
     end
-  end
-      # expect(page).to have_field "Description"
-      # expect(page).to have_button "Next"
+
+    context "creating an account" do 
+      before do
+        click_link "Create a test"
+        fill_in("Name", with: "Bob's Domain")
+        fill_in("Subdomain", with: "Bobs_subdomain")
+        click_button "Next"
+      end
+
+      scenario "should bring user to new test form" do
+        expect(page).to have_title "Create a Test"
+        expect(page).to have_field "Name"
+        expect(page).to have_field "Description"
+        expect(page).to have_field "Type of test"
+        expect(page).to have_button "Next"
+      end
+
+    end
+
+   end
       # expect(page).to have_field "First name"
       # expect(page).to have_field "Last name"
       # expect(page).to have_field "Email"
