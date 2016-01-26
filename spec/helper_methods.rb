@@ -13,6 +13,12 @@ module HelperMethods
     end
   end
 
+  def create_signed_in_user
+    user = FactoryGirl.create :user
+    sign_in_test_user(user)
+    user
+  end
+
   def fill_in_user_fields(email, password, password_confirmation=nil, first_name=nil, last_name=nil, current_password=nil)
     fill_in "First name", with: first_name if first_name
     fill_in "Last name", with: last_name if last_name
