@@ -9,11 +9,12 @@ RSpec.describe "CreatingTests", type: :feature do
     scenario "clicking 'Create a test' should bring user to subdomain creation page" do 
       click_link "Create a test" 
 
-      expect(page).to have_title "Create a Subomain"
+      expect(page).to have_title "Create a Subdomain"
       expect(page).to have_field "Subdomain"
+      expect(page).to have_field "Name"
+      expect(page).to have_button "Next"
     end
   end
-      # expect(page).to have_field "Name"
       # expect(page).to have_field "Description"
       # expect(page).to have_button "Next"
       # expect(page).to have_field "First name"
