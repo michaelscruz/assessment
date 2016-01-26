@@ -56,10 +56,4 @@ RSpec.describe "CreatingTests", type: :feature do
       end
     end
   end
-
-      # expect(page).to have_field "First name"
-      # expect(page).to have_field "Last name"
-      # expect(page).to have_field "Email"
-      # expect(page).to have_field "Password"
-      # expect(page).to have_field "Password confirmation"
 end
