@@ -2,6 +2,9 @@
 
   <%= f.fields_for :answers do |answer| %>
     <%= render 'answer_fields', f: answer %>
+    <div class="links">
+      <%= link_to_add_association "Add answer", f, :answers %>
+    </div>
   <% end %>
 
 </div>
