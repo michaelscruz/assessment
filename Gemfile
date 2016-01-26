@@ -36,6 +36,9 @@ end
 # Devise Authentication
 gem 'devise'
 
+# For nested forms
+gem 'cocoon'
+
 # For heroku
 gem 'rails_12factor', group: :production
 # Use ActiveModel has_secure_password
