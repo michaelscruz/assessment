@@ -10,6 +10,19 @@
 
     <%= form_for([@exam, @question]) do |f| %>
 
+      <% unless @exam.long_answer? %>
+        <hr>
+        <b>Question category</b>
+        <div class="form-group">
+          <% @exam.categories.each do |category| %>
+            <%= f.radio_button(:category, category.name) %>
+            <%= f.label(category.name_to_symbol, category.name) %>
+          <% end %>
+          <%= radio_button_tag(:category, "add new") %>
+          <%= label_tag(:new_category, "Add new category") %>
+        </div>
+      <% end %>
+
       <div class="form-group">
         <%= f.label :text, "Question text" %><br>
         <%= f.text_field :text, autofocus: true, class: "form-control" %>
