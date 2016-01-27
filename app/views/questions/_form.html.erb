@@ -20,6 +20,10 @@
           <% end %>
           <%= radio_button_tag(:category, "add new") %>
           <%= label_tag(:new_category, "Add new category") %>
+          <div id="new-category">
+            <%= f.label :category, "New category" %>
+            <%= f.text_field :category, autofocus: true, class: "form-control" %>
+          </div>
         </div>
       <% end %>
 
