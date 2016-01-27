@@ -18,6 +18,7 @@ class Question < ActiveRecord::Base
   has_many :answers
 
   accepts_nested_attributes_for :answers, reject_if: :all_blank, allow_destroy: true
+  accepts_nested_attributes_for :category, reject_if: :all_blank
   
   QUESTION_TYPES = ["multiple_choice", "long_answer"]
   validates_presence_of :exam

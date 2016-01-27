@@ -3,10 +3,12 @@ require 'helper_methods'
 include HelperMethods
 
 RSpec.describe "CreatingTests", type: :feature do
-  feature "Creating a new test without an account" do
+  subject { page }
+
+  describe "Creating a new test without an account" do
     before { @user = create_signed_in_user }
 
-    scenario "clicking 'Create a test' should bring user to subdomain creation page" do 
+    scenario "clicking 'Create a test'" do 
       click_link "Create a test" 
 
       expect(page).to have_title "Create a Subdomain"
@@ -15,7 +17,7 @@ RSpec.describe "CreatingTests", type: :feature do
       expect(page).to have_button "Next"
     end
 
-    context "creating an account" do 
+    describe "creating an account" do 
       before do
         click_link "Create a test"
         fill_in("Name", with: "Bob's Domain")
@@ -23,7 +25,7 @@ RSpec.describe "CreatingTests", type: :feature do
         click_button "Next"
       end
 
-      scenario "should bring user to new test form" do
+      it "should bring user to new test form" do
         expect(page).to have_title "Create a Test"
         expect(page).to have_field "Name"
         expect(page).to have_field "Description"
@@ -33,16 +35,14 @@ RSpec.describe "CreatingTests", type: :feature do
     end
   end
 
-  feature "Creating a new test with an existing account", js: true do
+  describe "Creating a new test with an existing account" do
     before do
       @user = create_signed_in_user(account: true, no_capybara: true)
       visit user_path(@user)
       click_link "Create a test"
     end
 
-    scenario "should bring user to new test form" do
-      expect(page).to have_title "Create a Test"
-    end
+    it { should have_title "Create a Test" }
 
     context "filling out the form for a new multiple choice test" do 
       before do 
@@ -52,30 +52,31 @@ RSpec.describe "CreatingTests", type: :feature do
         click_button "Next"
       end
 
-      scenario "should lead to a nex question form" do
+      it "should lead to a nex question form" do
         expect(page).to have_title "New Question"
       end
 
-      context "Adding an answer" do
+      describe "Adding an answer", js: true do
         before { click_link "Add answer" }
 
-        scenario "should bring up an answer form" do
+        it "should bring up an answer form" do
+          expect(page).to have_field "Question category"
           expect(page).to have_field "Answer text"
           expect(page).to have_field "Answer value"
           expect(page).to have_link "remove above answer"
         end
 
-        context "filling in the answer" do
+        describe "filling in the answer" do
           before do
             fill_in "Question text", with: "Here is my first question"
             fill_in "Answer text", with: "First option"
             fill_in "Answer value", with: 3
           end
 
-          context "clicking Add answer again should add another answer" do 
+          describe "clicking Add answer again should add another answer" do 
             before { click_link "Add answer" }
 
-            scenario "two answers" do
+            it "should have two answers" do
               expect(page).to have_field("Answer text", count: 2)
             end
 

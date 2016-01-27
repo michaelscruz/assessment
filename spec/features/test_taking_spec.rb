@@ -13,7 +13,7 @@ RSpec.describe "TestTakingPages", type: :feature do
     end
   end
 
-  feature "taking a test as a signed in user" do
+  describe "taking a test as a signed in user" do
     before do
       user = FactoryGirl.create :user
       sign_in_test_user(user)
@@ -28,7 +28,7 @@ RSpec.describe "TestTakingPages", type: :feature do
     context "with several tests in the db" do
       before { create_tests(5) }
 
-      scenario "it should have 5 tests" do
+      it "should have 5 tests" do
         click_link "Take a test"
         
         expect(page).to have_content("Test # ", count: 5)
