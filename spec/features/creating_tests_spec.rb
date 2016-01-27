@@ -62,7 +62,7 @@ RSpec.describe "CreatingTests", type: :feature do
         scenario "should bring up an answer form" do
           expect(page).to have_field "Answer text"
           expect(page).to have_field "Answer value"
-          expect(page).to have_link "remove answer"
+          expect(page).to have_link "remove above answer"
         end
 
         context "filling in the answer" do
@@ -88,7 +88,9 @@ RSpec.describe "CreatingTests", type: :feature do
             end
 
             scenario "clicking Finalize test should bring user to test show page" do 
-              click_button "Finalize test"
+              page.accept_alert "Are you sure? This will finish adding questions to your test." do
+                click_button "Finalize test"
+              end
 
               expect(page).to have_title "Sample Test"
             end

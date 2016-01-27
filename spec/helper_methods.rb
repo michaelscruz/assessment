@@ -4,6 +4,7 @@ include ApplicationHelper
 module HelperMethods
   def sign_in_test_user(user, options={})
     if options[:no_capybara]
+      login_as(user, scope: :user)
     else
       visit root_url
       click_link "Sign in"

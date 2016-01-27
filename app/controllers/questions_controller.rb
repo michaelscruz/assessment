@@ -19,7 +19,7 @@ class QuestionsController < ApplicationController
 
     if @question.save
       if params[:commit] == "Finalize test"
-        redirect_to user_url(current_user), notice: "Your test has been successfully created!"
+        redirect_to exam_url(@exam), notice: "Your test has been successfully created!"
       else
         redirect_to new_exam_question_path(@exam), notice: "Your question was successfully added!"
       end
