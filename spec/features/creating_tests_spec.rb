@@ -60,14 +60,16 @@ RSpec.describe "CreatingTests", type: :feature do
         before { click_link "Add answer" }
 
         it "should bring up an answer form" do
-          expect(page).to have_field "Question category"
+          expect(page).to have_content "Question category"
           expect(page).to have_field "Answer text"
           expect(page).to have_field "Answer value"
           expect(page).to have_link "remove above answer"
         end
 
-        describe "filling in the answer" do
+        describe "filling in the category and answer" do
           before do
+            choose "Add new category"
+            fill_in "New category", with: "Sample Category"
             fill_in "Question text", with: "Here is my first question"
             fill_in "Answer text", with: "First option"
             fill_in "Answer value", with: 3
@@ -76,24 +78,25 @@ RSpec.describe "CreatingTests", type: :feature do
           describe "clicking Add answer again should add another answer" do 
             before { click_link "Add answer" }
 
-            it "should have two answers" do
-              expect(page).to have_field("Answer text", count: 2)
+            it { should have_field "Answer text", count: 2 }
+
+            describe "clicking next question" do
+              before { click_button "Next question" }
+
+              it { should have_title "New Question" }
+              it { should have_field "Question text" }
+              it { should_not have_field "Answer text" }
+              it { should have_field "Sample Category" }
             end
 
-            scenario "clicking next question should bring up a new question form" do
-              click_button "Next question"
-
-              expect(page).to have_title "New Question"
-              expect(page).to have_field "Question text"
-              expect(page).not_to have_field "Answer text"
-            end
-
-            scenario "clicking Finalize test should bring user to test show page" do 
-              page.accept_alert "Are you sure? This will finish adding questions to your test." do
-                click_button "Finalize test"
+            describe "clicking Finalize test" do 
+              before do
+                page.accept_alert "Are you sure? This will finish adding questions to your test." do
+                  click_button "Finalize test"
+                end
               end
 
-              expect(page).to have_title "Sample Test"
+              it { should have_title "Sample Test" }
             end
           end
         end

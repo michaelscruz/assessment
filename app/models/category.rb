@@ -20,4 +20,7 @@ class Category < ActiveRecord::Base
     self.name.gsub(' ', '_').to_sym
   end
 
+  def id_name_with_underscores
+    "category_" + self.name.gsub(' ', '_')
+  end
 end

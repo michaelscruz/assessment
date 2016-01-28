@@ -17,12 +17,12 @@
           <% @exam.categories.each do |category| %>
             <div class="radio">
               <%= radio_button_tag(:category, category.name) %>
-              <%= label_tag(category.name_to_symbol, category.name) %>
+              <%= label_tag(category.id_name_with_underscores, category.name) %>
             </div>
           <% end %>
           <div class="radio">
             <%= radio_button_tag(:category, "") %>
-            <%= label_tag(:add_category, "Add new category") %>
+            <%= label_tag(:category_, "Add new category") %>
           </div>
         </div>
         <div class="form-group" id="new-category">
