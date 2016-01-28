@@ -11,6 +11,14 @@ class QuestionsController < ApplicationController
     @exam = Exam.find(params[:exam_id])
     @question.exam = @exam
 
+    if params[:category].blank? && !params[:new_category].blank?
+      category = Category.new(name: params[:new_category], exam: @exam)
+      @question.category = category
+      category.save
+    elsif !params[:category].blank?
+      @question.category = Category.where(name: params[:category], exam: @exam).first
+    end
+
     if @exam.multiple_choice?
       @question.question_type = "multiple_choice"
     elsif @exam.long_answer? 

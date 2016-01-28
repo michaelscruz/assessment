@@ -15,4 +15,9 @@ class Category < ActiveRecord::Base
   has_many :category_reports
 
   validates_presence_of :name, :exam
+
+  def name_to_symbol
+    self.name.gsub(' ', '_').to_sym
+  end
+
 end

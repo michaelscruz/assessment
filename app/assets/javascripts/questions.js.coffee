@@ -5,7 +5,11 @@ $ ->
 
   $('#new-category').hide()
 
-  alert("Hello")
-  $('#category_add_new').change ->
-      $('#new-category').toggle()
+  $('.radio').click ->
+    if $('#category_').prop('checked') == true
+      $('#new-category').show()
+    else
+      $('#new-category').hide()
+      $('.new-category').val("")
+
 
