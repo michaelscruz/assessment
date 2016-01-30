@@ -57,6 +57,13 @@ RSpec.describe "CreatingTests", type: :feature do
       it { should_not have_content "Question category" }
       it { should have_content "Question #1" }
 
+      describe "selecting Finalize test with no questions added yet" do
+        before { click_button "Finalize test" }
+
+        it { should have_title "New Question" }
+        it { should have_content "error" }
+      end
+
       describe "creating a question" do
         before do
           fill_in "Question text", with: "What are your favorite words to type?"
@@ -92,6 +99,13 @@ RSpec.describe "CreatingTests", type: :feature do
 
       it "should lead to a next question form" do
         expect(page).to have_title "New Question"
+      end
+
+      describe "selecting Finalize test with no questions added yet" do
+        before { click_button "Finalize test" }
+
+        it { should have_title "New Question" }
+        it { should have_content "error" }
       end
 
       describe "Adding an answer", js: true do
@@ -131,6 +145,16 @@ RSpec.describe "CreatingTests", type: :feature do
               it { should have_field "Question text" }
               it { should_not have_field "Answer text" }
               it { should have_field "Sample Category" }
+
+              describe "selecting Finalize test with a blank question" do
+                before do
+                  page.accept_alert "Are you sure? This will finish adding questions to your test." do
+                    click_button "Finalize test"
+                  end
+                end
+
+                it { should have_title "Sample Test" }
+              end
             end
 
             describe "not submitting a category for multiple choice test question", :no_category do 

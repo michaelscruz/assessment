@@ -24,9 +24,14 @@ class QuestionsController < ApplicationController
     elsif @exam.long_answer? 
       @question.question_type = "long_answer"
     end
-    
+
     if @question.blank?
-      redirect_to @exam, notice: "Your test has been successfully created!"
+      if @exam.questions.empty?
+        @question.errors.add(:exam, "must have at least one question")
+        render :new
+      else
+        redirect_to @exam, notice: "Your test has been successfully created!"
+      end
     else
       if @question.save
         if params[:commit] == "Finalize test"
