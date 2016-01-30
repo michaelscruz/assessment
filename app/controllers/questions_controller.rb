@@ -24,15 +24,19 @@ class QuestionsController < ApplicationController
     elsif @exam.long_answer? 
       @question.question_type = "long_answer"
     end
-
-    if @question.save
-      if params[:commit] == "Finalize test"
-        redirect_to exam_url(@exam), notice: "Your test has been successfully created!"
-      else
-        redirect_to new_exam_question_path(@exam), notice: "Your question was successfully added!"
-      end
+    
+    if @question.blank?
+      redirect_to @exam, notice: "Your test has been successfully created!"
     else
-      render :new
+      if @question.save
+        if params[:commit] == "Finalize test"
+          redirect_to exam_url(@exam), notice: "Your test has been successfully created!"
+        else
+          redirect_to new_exam_question_path(@exam), notice: "Your question was successfully added!"
+        end
+      else
+        render :new
+      end
     end
   end
 

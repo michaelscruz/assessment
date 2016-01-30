@@ -33,4 +33,12 @@ class Question < ActiveRecord::Base
   def has_category?
     !self.category.nil? && Category.find_by(id: self.category_id)
   end
+
+  def blank?
+    if multiple_choice?
+      return self.text.blank? && self.answers.empty? && self.category.nil?
+    else
+      return self.text.blank?
+    end
+  end
 end

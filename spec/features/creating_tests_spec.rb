@@ -42,9 +42,41 @@ RSpec.describe "CreatingTests", type: :feature do
       click_link "Create a test"
     end
 
-    it { should have_title "Create a Test" }  
+    it { should have_title "Create a Test" } 
 
-    context "filling out the form for a new multiple choice test" do 
+    describe "filling out the form for a new long answer test", :long_answer do
+      before do
+        fill_in "Name", with: "Sample Long Answer Test"
+        fill_in "Description", with: "This a sample long answer test."
+        select "Long answer", from: "Type of test"
+        click_button "Next"
+      end
+
+      it { should have_title "New Question" }
+      it { should_not have_link "Add answer" }
+      it { should_not have_content "Question category" }
+      it { should have_content "Question #1" }
+
+      describe "creating a question" do
+        before do
+          fill_in "Question text", with: "What are your favorite words to type?"
+          click_button "Next"
+        end
+
+        it { should have_content "Question #2" }
+
+        describe "adding one more question and finalizing the test" do
+          before do
+            fill_in "Question text", with: "How do you feel about really short tests?"
+            click_button "Finalize test"
+          end
+
+          it { should have_title "Sample Long Answer Test" }
+        end
+      end
+    end
+
+    describe "filling out the form for a new multiple choice test", :multiple_choice do 
       before do 
         fill_in "Name", with: "Sample Test"
         fill_in "Description", with: "This is a sample test."
@@ -52,7 +84,7 @@ RSpec.describe "CreatingTests", type: :feature do
         click_button "Next"
       end
 
-      it "should lead to a nex question form" do
+      it "should lead to a next question form" do
         expect(page).to have_title "New Question"
       end
 
@@ -101,8 +133,10 @@ RSpec.describe "CreatingTests", type: :feature do
                 fill_in "Question text", with: "Here is my second question"
                 click_link "Add answer"
                 fill_in "Answer text", with: "First option"
+                fill_in "Answer value", with: 2
                 click_link "Add answer"
                 page.all(:fillable_field, "Answer text").last.set("Second option")
+                page.all(:fillable_field, "Answer value").last.set(-2)
                 click_button "Next question"
               end
 
