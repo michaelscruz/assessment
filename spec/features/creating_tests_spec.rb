@@ -73,6 +73,12 @@ RSpec.describe "CreatingTests", type: :feature do
 
           it { should have_title "Sample Long Answer Test" }
         end
+
+        describe "selecting Finalize test with a blank question" do
+          before { click_button "Finalize test" }
+
+          it { should have_title "Sample Long Answer Test" }
+        end
       end
     end
 
