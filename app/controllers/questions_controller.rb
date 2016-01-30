@@ -10,22 +10,11 @@ class QuestionsController < ApplicationController
     @question = Question.new(question_params)
     @exam = Exam.find(params[:exam_id])
     @question.exam = @exam
+    @question.set_type
 
-    if params[:category].blank? && !params[:new_category].blank?
-      category = Category.new(name: params[:new_category], exam: @exam)
-      @question.category = category
-      category.save
-    elsif !params[:category].blank?
-      @question.category = Category.where(name: params[:category], exam: @exam).first
-    end
+    set_category(params) if  @question.multiple_choice?
 
-    if @exam.multiple_choice?
-      @question.question_type = "multiple_choice"
-    elsif @exam.long_answer? 
-      @question.question_type = "long_answer"
-    end
-
-    if @question.blank?
+    if @question.blank? && params[:commit] == "Finalize test"
       if @exam.questions.empty?
         @question.errors.add(:exam, "must have at least one question")
         render :new
@@ -49,5 +38,15 @@ class QuestionsController < ApplicationController
 
     def question_params
       params.require(:question).permit(:text, :question_type, answers_attributes: [ :text, :value, :_destroy ] )
+    end
+
+    def set_category(params)
+      if params[:category].blank? && !params[:new_category].blank?
+        category = Category.new(name: params[:new_category], exam: @exam)
+        @question.category = category
+        category.save
+      elsif !params[:category].blank?
+        @question.category = Category.where(name: params[:category], exam: @exam).first
+      end
     end
 end

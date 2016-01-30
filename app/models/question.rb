@@ -41,4 +41,9 @@ class Question < ActiveRecord::Base
       return self.text.blank?
     end
   end
+
+  def set_type
+    self.question_type = self.exam.exam_type
+  end
+
 end
