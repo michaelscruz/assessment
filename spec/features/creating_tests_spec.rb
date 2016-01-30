@@ -42,12 +42,12 @@ RSpec.describe "CreatingTests", type: :feature do
       click_link "Create a test"
     end
 
-    it { should have_title "Create a Test" }
+    it { should have_title "Create a Test" }  
 
     context "filling out the form for a new multiple choice test" do 
       before do 
         fill_in "Name", with: "Sample Test"
-        fill_in "Description", with: "This is a sample test. " * 50
+        fill_in "Description", with: "This is a sample test."
         select "Multiple choice", from: "Type of test"
         click_button "Next"
       end
@@ -57,7 +57,9 @@ RSpec.describe "CreatingTests", type: :feature do
       end
 
       describe "Adding an answer", js: true do
-        before { click_link "Add answer" }
+        before do 
+          click_link "Add answer" 
+        end
 
         it "should bring up an answer form" do
           expect(page).to have_content "Question category"
@@ -76,17 +78,35 @@ RSpec.describe "CreatingTests", type: :feature do
           end
 
           describe "clicking Add answer again should add another answer" do 
-            before { click_link "Add answer" }
+            before do
+              click_link "Add answer"
+            end
 
             it { should have_field "Answer text", count: 2 }
 
             describe "clicking next question" do
-              before { click_button "Next question" }
+              before do
+                click_button "Next question" 
+              end
 
               it { should have_title "New Question" }
               it { should have_field "Question text" }
               it { should_not have_field "Answer text" }
               it { should have_field "Sample Category" }
+            end
+
+            describe "not submitting a category for multiple choice test question", :no_category do 
+              before do
+                click_button "Next question"
+                fill_in "Question text", with: "Here is my second question"
+                click_link "Add answer"
+                fill_in "Answer text", with: "First option"
+                click_link "Add answer"
+                page.all(:fillable_field, "Answer text").last.set("Second option")
+                click_button "Next question"
+              end
+
+              it { should have_content "error" }
             end
 
             describe "clicking Finalize test" do 
