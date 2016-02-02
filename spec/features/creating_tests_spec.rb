@@ -136,13 +136,14 @@ RSpec.describe "CreatingTests", type: :feature do
 
             it { should have_field "Answer text", count: 2 }
 
-            describe "clicking next question" do
+            describe "clicking next question", :new_question do
               before do
                 click_button "Next question" 
               end
 
               it { should have_title "New Question" }
               it { should have_field "Question text" }
+              it { should have_content "Question #2"}
               it { should_not have_field "Answer text" }
               it { should have_field "Sample Category" }
 

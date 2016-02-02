@@ -46,4 +46,13 @@ class Question < ActiveRecord::Base
     self.question_type = self.exam.exam_type
   end
 
+  def set_category(existing_category_name, new_category_name)
+    if existing_category_name.blank? && !new_category_name.blank?
+      new_category = Category.new(name: new_category_name, exam: self.exam)
+      new_category.save
+      self.category = new_category
+    elsif !existing_category_name.blank?
+      self.category = Category.find_by(name: existing_category_name, exam: self.exam)
+    end
+  end
 end
