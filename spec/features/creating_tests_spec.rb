@@ -52,16 +52,20 @@ RSpec.describe "CreatingTests", type: :feature do
         click_button "Next"
       end
 
-      it { should have_title "New Question" }
-      it { should_not have_link "Add answer" }
-      it { should_not have_content "Question category" }
-      it { should have_content "Question #1" }
+      it "should bring user to Question #1 form" do
+        expect(page).to have_title "New Question" 
+        expect(page).to_not have_link "Add answer" 
+        expect(page).to_not have_content "Question category" 
+        expect(page).to have_content "Question #1" 
+      end
 
       describe "selecting Finalize test with no questions added yet" do
         before { click_button "Finalize test" }
 
-        it { should have_title "New Question" }
-        it { should have_content "error" }
+        it "should bring user back to new question form with an error" do 
+        expect(page).to have_title "New Question" 
+        expect(page).to have_content "error" 
+        end
       end
 
       describe "creating a question" do
@@ -104,8 +108,10 @@ RSpec.describe "CreatingTests", type: :feature do
       describe "selecting Finalize test with no questions added yet" do
         before { click_button "Finalize test" }
 
-        it { should have_title "New Question" }
-        it { should have_content "error" }
+        it "should bring them back to the new question form with an error message" do
+          expect(page).to have_title "New Question" 
+          expect(page).to have_content "error" 
+        end
       end
 
       describe "Adding an answer", js: true do
@@ -141,11 +147,13 @@ RSpec.describe "CreatingTests", type: :feature do
                 click_button "Next question" 
               end
 
-              it { should have_title "New Question" }
-              it { should have_field "Question text" }
-              it { should have_content "Question #2"}
-              it { should_not have_field "Answer text" }
-              it { should have_field "Sample Category" }
+              it "should be on a new question form for Question 2" do
+                expect(page).to have_title "New Question" 
+                expect(page).to have_field "Question text" 
+                expect(page).to have_content "Question #2"
+                expect(page).to_not have_field "Answer text" 
+                expect(page).to have_field "Sample Category" 
+              end
 
               describe "selecting Finalize test with a blank question" do
                 before do
