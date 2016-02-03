@@ -14,11 +14,11 @@ RSpec.describe "TestTakingPages", type: :feature do
     end
 
     describe "clicking on a test" do 
-      before { page.first(:link, "Mulitple Choice Test").click }
+      before { page.first(:link, "Multiple Choice Test").click }
 
       it "should be the test's show page" do
         expect(page).to have_title "Multiple Choice Test"
-        expect(page).to have_text "Multipe Choice Test"
+        expect(page).to have_text "Multiple Choice Test"
         expect(page).to have_text "Here is the description of this very revealing test."
         expect(page).to have_text "My account"
       end

@@ -1,16 +1,31 @@
 <%= provide(:title, @exam.name) %>
 
-<p id="notice"><%= notice %></p>
+<div class="jumbotron writing no-padding">
+  <div class="container">
+  </div>
+</div>
 
-<table class="table">
-  <thead>
-    <th class="col-md-12">
-      <%= @exam.name %>
-    </th>
-  </thead>
-  <tbody>
-    <td><%= @exam.description %></td>
-  </tbody>
-</table>
+<div class="row">
+  <div class="well col-sm-8 col-md-offset-2">
+    <p id="notice"><%= notice %></p>
 
-<%= link_to 'Back', exams_path %>
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          From: <%= @exam.account.name %>
+        </tr>
+        <tr>
+          <th class="col-sm-12">
+            <%= @exam.name %>
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <%= @exam.description %>
+        </tr>
+      </tbody>
+    </table>
+
+  </div>
+</div>
