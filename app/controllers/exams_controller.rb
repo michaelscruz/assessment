@@ -39,8 +39,9 @@ class ExamsController < ApplicationController
   # GET /tests/1/begin
   def begin
     @exam = Exam.includes(:questions).find_by(id: params[:id])
-    Score.create!(user: current_user, exam: @exam) if Score.find_by(user: current_user, exam: @exam).nil?
-    redirect_to exam_question_url(@exam, @exam.questions.first)
+    score = Score.find_by(user: current_user, exam: @exam)
+    score ||= Score.create(user: current_user, exam: @exam)
+    redirect_to exam_question_url(@exam, @exam.questions[score.questions_answered])
   end
 
   # POST /tests
