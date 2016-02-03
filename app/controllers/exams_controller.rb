@@ -12,7 +12,7 @@
 #
 
 class ExamsController < ApplicationController
-  before_action :authenticate_user!, only: [:new, :create, :edit, :update, :destroy]
+  before_action :authenticate_user!, only: [:new, :create, :edit, :begin, :update, :destroy]
 
   # GET /tests
   # GET /tests.json
@@ -39,7 +39,7 @@ class ExamsController < ApplicationController
   # GET /tests/1/begin
   def begin
     @exam = Exam.includes(:questions).find_by(id: params[:id])
-    Score.create(user: current_user, exam: @exam) if Score.find_by(user: current_user, exam: @exam).nil?
+    Score.create!(user: current_user, exam: @exam) if Score.find_by(user: current_user, exam: @exam).nil?
     redirect_to exam_question_url(@exam, @exam.questions.first)
   end
 

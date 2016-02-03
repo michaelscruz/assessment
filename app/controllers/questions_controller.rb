@@ -23,6 +23,7 @@ class QuestionsController < ApplicationController
   def show
     @question = Question.includes(:answers, :exam).find_by(id: params[:id])
     @exam = @question.exam
+    @score = Score.find_by(user: current_user, exam: @exam)
   end
 
   def create
