@@ -49,6 +49,10 @@ class ExamsController < ApplicationController
     end
   end
 
+  def complete
+    @exam = Exam.find(params[:id])
+  end
+
   # POST /tests
   # POST /tests.json
   def create
