@@ -24,6 +24,10 @@ class QuestionsController < ApplicationController
     @question = Question.includes(:answers, :exam).find_by(id: params[:id])
     @exam = @question.exam
     @score = Score.find_by(user: current_user, exam: @exam)
+    if @question.multiple_choice?
+      @category_score = CategoryScore.find_by(:category => @question.category, :user => current_user)
+      @category_score ||= CategoryScore.new 
+    end
   end
 
   def create

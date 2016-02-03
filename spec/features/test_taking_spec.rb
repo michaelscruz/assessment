@@ -1,11 +1,12 @@
 require 'rails_helper'
 
 RSpec.describe "TestTakingPages", type: :feature do
+  before { create_multiple_choice_tests(3) }
+
   subject { page }
 
   describe "browsing tests from the home page without signing in" do
     before do
-      create_multiple_choice_tests(3)
       visit root_url 
       click_link "Browse tests"
     end
@@ -63,10 +64,23 @@ RSpec.describe "TestTakingPages", type: :feature do
       sign_in_test_user(user)
     end
 
-    scenario "clicking the 'Take a test' button" do
-      click_link "Take a test"
+    describe "clicking the 'Take a test' button" do
+      before { click_link "Take a test" }
 
-      expect(page).to have_title "Tests"
+      it "should display the test index page" do 
+        expect(page).to have_title "Tests"
+      end
+
+      describe "selecting a test and beginning" do
+        before do
+          page.first(:link, "Multiple Choice Test").click
+          click_link "Take this test"
+          page.choose('').first
+          click_button "Next"
+        end
+
+        it { should have_content 'Question #2' }
+      end
     end 
   end
 end
