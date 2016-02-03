@@ -7,6 +7,7 @@ Rails.application.routes.draw do
       get 'begin', as: :begin
     end
     resources :questions
+    resources :category_scores, only: [:create, :update]
   end
 
   resources :accounts, except: [:index, :show]
