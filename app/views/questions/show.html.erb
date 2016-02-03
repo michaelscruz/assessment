@@ -1,3 +1,36 @@
 <%= provide(:title, "#{@exam.name} - Question #{@score.questions_answered+1}") %>
 
-<h1>Question #<%= @score.questions_answered+1 %></h1>
+<div class="row">
+  <div class="well col-sm-12 col-md-8 col-md-offset-2">
+    <h1>Question #<%= @score.questions_answered+1 %></h1>
+    <table class="table">
+      <% if @question.multiple_choice? %>
+        <% form_for(@category_score) do |f| %>
+          <thead>
+            <tr>
+              <th class="exam-name col-md-10"><%= @question.text %></th>
+              <th class="col-md-2"></th>
+            </tr>
+          </thead>
+          <tbody class="form-group">
+            <% @question.answers.each do |answer| %>
+              <tr>
+                <td class="radio">
+                  <%= radio_button_tag(:answer_value, answer.value, id: answer.element_id) %>
+                  <%= label_tag(answer.element_id, answer.value) %>
+                </td>
+                <td></td>
+              </tr>
+            <% end %>
+            <tr>
+              <td></td>
+              <td>
+                <%= f.submit "Next", class: "btn btn-lg btn-primary" %>
+              </td>
+            </tr>
+          </tbody>
+        <% end %>
+      <% end %>
+    </table>
+  </div>
+</div>
