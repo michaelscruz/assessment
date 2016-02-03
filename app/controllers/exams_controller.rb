@@ -25,7 +25,8 @@ class ExamsController < ApplicationController
 
   # GET /tests/1/begin
   def begin
-    @exam = Exam.find(params[:id])
+    @exam = Exam.includes(:questions).find_by(id: params[:id])
+    redirect_to exam_question_url(@exam, @exam.questions.first)
   end
 
   # POST /tests

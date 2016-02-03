@@ -6,6 +6,11 @@ class QuestionsController < ApplicationController
     @exam = Exam.includes(:questions).find_by(id: params[:exam_id])
   end
 
+  def show
+    @question = Question.includes(:answers, :exam).find_by(id: params[:id])
+    @exam = @question.exam
+  end
+
   def create
     @question = Question.new(question_params)
     @exam = Exam.find(params[:exam_id])
