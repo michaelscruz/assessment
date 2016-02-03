@@ -18,9 +18,10 @@
           <th class="col-sm-4"></th>
         </tr>
         <tr>
-          <th class="col-sm-12">
+          <th class="col-sm-9">
             <span class="exam-name"><%= @exam.name %></span>
           </th>
+          <th class="col-sm-3"></th>
         </tr>
       </thead>
       <tbody>
@@ -31,6 +32,13 @@
         </tr>
         <tr>
           <td>Number of questions: <%= @exam.questions.count %></td>
+          <td></td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>
+            <%= link_to 'Take this test', begin_exam_path(@exam), class: "btn btn-lg btn-primary" %>
+          </td>
         </tr>
       </tbody>
     </table>

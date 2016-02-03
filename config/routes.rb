@@ -3,6 +3,9 @@ Rails.application.routes.draw do
   resources :users, only: :show
   
   resources :tests, controller: :exams, as: :exams do
+    member do
+      get 'begin', as: :begin
+    end
     resources :questions
   end
 

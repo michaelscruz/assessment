@@ -25,8 +25,17 @@ RSpec.describe "TestTakingPages", type: :feature do
       end
 
       describe "taking the test" do 
+        before { click_link "Take this test" }
+
+        it "should show the purchasing page(s)" do 
+        end
+
         describe "purchasing the test" do
+
+          it { should have_content "Question #1" }
+          
           describe "answering the first question" do 
+
           end
         end
       end
