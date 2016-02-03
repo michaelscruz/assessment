@@ -1,30 +1,35 @@
 class ExamsController < ApplicationController
   before_action :authenticate_user!, only: [:new, :create, :edit, :update, :destroy]
 
-  # GET /exams
-  # GET /exams.json
+  # GET /tests
+  # GET /tests.json
   def index
     @exams = Exam.all
   end
 
-  # GET /exams/1
-  # GET /exams/1.json
+  # GET /tests/1
+  # GET /tests/1.json
   def show
     @exam = Exam.includes(:questions, :answers).where(id: params[:id]).first
   end
 
-  # GET /exams/new
+  # GET /tests/new
   def new
     @exam = Exam.new
   end
 
-  # GET /exams/1/edit
+  # GET /tests/1/edit
   def edit
     @exam = Exam.find(params[:id])
   end
 
-  # POST /exams
-  # POST /exams.json
+  # GET /tests/1/begin
+  def begin
+    @exam = Exam.find(params[:id])
+  end
+
+  # POST /tests
+  # POST /tests.json
   def create
     @exam = Exam.new(exam_params)
     @exam.account = current_user.account
@@ -40,8 +45,8 @@ class ExamsController < ApplicationController
     end
   end
 
-  # PATCH/PUT /exams/1
-  # PATCH/PUT /exams/1.json
+  # PATCH/PUT /tests/1
+  # PATCH/PUT /tests/1.json
   def update
     @exam = Exam.find(params[:id])
     respond_to do |format|
@@ -55,8 +60,8 @@ class ExamsController < ApplicationController
     end
   end
 
-  # DELETE /exams/1
-  # DELETE /exams/1.json
+  # DELETE /tests/1
+  # DELETE /tests/1.json
   def destroy
     @exam = Exam.find(params[:id])
     @exam.destroy
