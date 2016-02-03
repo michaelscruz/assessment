@@ -1,4 +1,5 @@
 class StaticPagesController < ApplicationController
+  before_action :redirect_if_signed_in, only: :home
   def home
   end
 
@@ -10,4 +11,10 @@ class StaticPagesController < ApplicationController
 
   def help
   end
+
+  private
+
+    def redirect_if_signed_in
+      redirect_to current_user if current_user
+    end
 end
