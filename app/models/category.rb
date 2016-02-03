@@ -13,6 +13,7 @@ class Category < ActiveRecord::Base
   belongs_to :exam
   has_many :questions
   has_many :category_reports
+  has_many :category_scores, dependent: :destroy
 
   validates_presence_of :name, :exam
 

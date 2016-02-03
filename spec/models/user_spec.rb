@@ -35,6 +35,7 @@ RSpec.describe User, type: :model do
   it { should respond_to :exams }
   it { should respond_to :reports }
   it { should respond_to :account }
+  it { should respond_to :category_scores }
 
   it { should be_valid }
 
@@ -140,6 +141,25 @@ RSpec.describe User, type: :model do
 
       it "should destroy the account also" do
         expect(Account.find_by(id: @account.id)).to be nil
+      end
+    end
+  end
+
+  describe "with a couple category scores" do 
+    before do
+      FactoryGirl.create(:category_score, user: user)
+      FactoryGirl.create(:category_score, user: user)
+    end
+
+    it "should have two category reports" do 
+      expect(user.category_scores.count).to eq 2
+    end
+
+    describe "destroying the user" do 
+      before { user.destroy }
+
+      it "should destroy the category reports, too" do
+        expect(CategoryScore.all.count).to eq 0
       end
     end
   end

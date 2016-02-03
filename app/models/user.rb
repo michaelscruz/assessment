@@ -28,6 +28,7 @@ class User < ActiveRecord::Base
   has_many :scores, dependent: :destroy
   has_many :exams, through: :scores
   has_many :reports, dependent: :destroy
+  has_many :category_scores, dependent: :destroy
   has_one :account, dependent: :destroy
 
   validates_presence_of :first_name, :last_name
