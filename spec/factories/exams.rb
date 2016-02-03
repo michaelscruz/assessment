@@ -21,6 +21,8 @@ FactoryGirl.define do
 
   factory :multiple_choice_exam_with_three_questions, :parent => :exam  do
     sequence(:name) { |n| "Multiple Choice Test ##{n}" }
-    questions { create_list :question_with_answers, 3 }
+    after(:build) do |exam|
+      exam.questions = create_list(:question_with_answers, 3, exam: exam, category: nil)
+    end
   end
 end

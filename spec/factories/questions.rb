@@ -22,7 +22,9 @@ FactoryGirl.define do
   end
 
   factory :question_with_answers, :parent => :question do
-    category { FactoryGirl.create :category }
-    answers { create_list :answer, 3 }
+    after(:build) do |question|
+      question.category = FactoryGirl.create(:category, exam: question.exam)
+      question.answers = create_list(:answer, 3, question: question)
+    end
   end
 end

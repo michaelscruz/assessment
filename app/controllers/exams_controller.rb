@@ -41,7 +41,8 @@ class ExamsController < ApplicationController
     @exam = Exam.includes(:questions).find_by(id: params[:id])
     score = Score.find_by(user: current_user, exam: @exam)
     score ||= Score.create(user: current_user, exam: @exam)
-    redirect_to exam_question_url(@exam, @exam.questions[score.questions_answered])
+    questions = @exam.questions.order(:created_at)
+    redirect_to exam_question_url(@exam, questions[score.questions_answered])
   end
 
   # POST /tests
