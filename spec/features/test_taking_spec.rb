@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe "TestTakingPages", type: :feature do
   subject { page }
-  
+
   describe "browsing tests from the home page without signing in" do
     before do
       create_multiple_choice_tests(3)
@@ -29,15 +29,28 @@ RSpec.describe "TestTakingPages", type: :feature do
       describe "taking the test" do 
         before { click_link "Take this test" }
 
-        it "should show the purchasing page(s)" do 
+        it "should prompt the user to sign in or sign up" do
+          expect(page).to have_content "You need to sign in or sign up"
         end
 
-        describe "purchasing the test" do
+        describe "signing in" do 
+          before do
+            user = FactoryGirl.create :user
+            fill_in "Email", with: user.email
+            fill_in "Password", with: user.password
+            click_button "Sign in"
+          end
 
-          it { should have_content "Question #1" }
+          it "should show the purchasing page(s)" do 
+          end
 
-          describe "answering the first question" do 
+          describe "purchasing the test" do
 
+            it { should have_content "Question #1" }
+
+            describe "answering the first question" do 
+
+            end
           end
         end
       end
