@@ -58,7 +58,7 @@ ActiveRecord::Schema.define(version: 20160203190431) do
   create_table "category_scores", force: true do |t|
     t.integer  "user_id"
     t.integer  "category_id"
-    t.integer  "score"
+    t.integer  "score",       default: 0, null: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
