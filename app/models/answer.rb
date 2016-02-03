@@ -14,4 +14,8 @@ class Answer < ActiveRecord::Base
   belongs_to :question, :inverse_of => :answers
 
   validates_presence_of :text, :value, :question
+
+  def element_id
+    "answer_#{self.id}"
+  end
 end
