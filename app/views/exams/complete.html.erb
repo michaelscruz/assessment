@@ -1,0 +1,23 @@
+<%= provide(:title, "Test Complete") %>
+
+<div class="row">
+  <div class="well col-sm-12 col-md-8 col-md-offset-2">
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th><h1>Congratulations!</h1></th>
+        </tr>
+        <tr>
+          <th><h2> You've completed the test <strong><%= @exam.name %></h2></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>
+            <%= link_to "See results", '#', class: "btn btn-lg btn-success" %>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
