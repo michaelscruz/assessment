@@ -17,8 +17,12 @@ FactoryGirl.define do
     sequence(:text) { |n| "What is #{n} + #{n}?" } 
     question_type "multiple_choice"
     long_answer nil
-    exam { FactoryGirl.create(:exam) }
-    category { FactoryGirl.create(:category) }
+    exam
+    category
   end
 
+  factory :question_with_answers, :parent => :question do
+    category { FactoryGirl.create :category }
+    answers { create_list :answer, 3 }
+  end
 end

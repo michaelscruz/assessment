@@ -19,4 +19,8 @@ FactoryGirl.define do
     exam_type { "multiple_choice" }
   end
 
+  factory :multiple_choice_exam_with_three_questions, :parent => :exam  do
+    sequence(:name) { |n| "Multiple Choice Test ##{n}" }
+    questions { create_list :question_with_answers, 3 }
+  end
 end

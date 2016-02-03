@@ -1,15 +1,16 @@
 require 'rails_helper'
-require 'helper_methods'
-include HelperMethods
 
 RSpec.describe "TestTakingPages", type: :feature do
-  feature "browsing tests from the home page" do
-    before { visit root_url }
-
-    scenario "should show tests index" do
+  describe "browsing tests from the home page without signing in" do
+    before do
+      create_multiple_choice_tests(3)
+      visit root_url 
       click_link "Browse tests"
+    end
 
+    it "should show tests index" do
       expect(page).to have_title "Tests"
+      expect(page).to have_link "Multiple Choice Test #", :count => 3
     end
   end
 
@@ -23,16 +24,6 @@ RSpec.describe "TestTakingPages", type: :feature do
       click_link "Take a test"
 
       expect(page).to have_title "Tests"
-    end
-
-    context "with several tests in the db" do
-      before { create_tests(5) }
-
-      it "should have 5 tests" do
-        click_link "Take a test"
-        
-        expect(page).to have_content("Test # ", count: 5)
-      end
-    end
+    end 
   end
 end
