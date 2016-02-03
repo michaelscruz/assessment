@@ -75,7 +75,7 @@ RSpec.describe "TestTakingPages", type: :feature do
         before do
           page.first(:link, "Multiple Choice Test").click
           click_link "Take this test"
-          page.choose('').first
+          page.choose('Answer').first
           click_button "Next"
         end
 
