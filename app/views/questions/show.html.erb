@@ -6,6 +6,7 @@
     <table class="table">
       <% if @question.multiple_choice? %>
         <%= form_for([@exam, @category_score]) do |f| %>
+          <%= f.hidden_field(:category_id, value: @question.category.id) %>
           <thead>
             <tr>
               <th class="exam-name col-md-10"><%= @question.text %></th>
