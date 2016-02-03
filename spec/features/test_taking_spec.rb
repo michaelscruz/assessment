@@ -1,6 +1,8 @@
 require 'rails_helper'
 
 RSpec.describe "TestTakingPages", type: :feature do
+  subject { page }
+  
   describe "browsing tests from the home page without signing in" do
     before do
       create_multiple_choice_tests(3)
@@ -33,7 +35,7 @@ RSpec.describe "TestTakingPages", type: :feature do
         describe "purchasing the test" do
 
           it { should have_content "Question #1" }
-          
+
           describe "answering the first question" do 
 
           end
