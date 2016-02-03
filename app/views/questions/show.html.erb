@@ -5,7 +5,7 @@
     <h1>Question #<%= @score.questions_answered+1 %></h1>
     <table class="table">
       <% if @question.multiple_choice? %>
-        <% form_for([@exam, @category_score]) do |f| %>
+        <%= form_for([@exam, @category_score]) do |f| %>
           <thead>
             <tr>
               <th class="exam-name col-md-10"><%= @question.text %></th>
@@ -16,8 +16,8 @@
             <% @question.answers.each do |answer| %>
               <tr>
                 <td class="radio">
-                  <%= radio_button_tag(:answer_value, answer.value, id: answer.element_id) %>
-                  <%= label_tag(answer.element_id, answer.text) %>
+                  <%= radio_button_tag(:answer_value, answer.value) %>
+                  <%= label_tag(answer.element_id(answer.value), answer.text) %>
                 </td>
                 <td></td>
               </tr>

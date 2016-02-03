@@ -15,7 +15,7 @@ class Answer < ActiveRecord::Base
 
   validates_presence_of :text, :value, :question
 
-  def element_id
-    "answer_#{self.id}"
+  def element_id(rails_generated_random_unpredictable_stupid_id)
+    "answer_value_#{rails_generated_random_unpredictable_stupid_id}"
   end
 end
