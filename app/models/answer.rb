@@ -11,7 +11,7 @@
 #
 
 class Answer < ActiveRecord::Base
-  belongs_to :question
+  belongs_to :question, :inverse_of => :answers
 
-  validates_presence_of :text, :value
+  validates_presence_of :text, :value, :question
 end

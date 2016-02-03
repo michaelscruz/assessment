@@ -15,7 +15,7 @@
 class Question < ActiveRecord::Base
   belongs_to :category
   belongs_to :exam
-  has_many :answers
+  has_many :answers, :inverse_of => :question
 
   accepts_nested_attributes_for :answers, reject_if: :all_blank, allow_destroy: true
   accepts_nested_attributes_for :category, reject_if: :all_blank

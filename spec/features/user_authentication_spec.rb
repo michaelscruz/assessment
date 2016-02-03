@@ -1,6 +1,4 @@
 require 'rails_helper'
-require 'helper_methods'
-include HelperMethods
 
 RSpec.describe "UsersPages", type: :feature do
   feature "user authentication" do
