@@ -21,6 +21,7 @@ RSpec.describe "TestTakingPages", type: :feature do
         expect(page).to have_text "Multiple Choice Test"
         expect(page).to have_text "Here is the description of this very revealing test."
         expect(page).to have_text "My account"
+        expect(page).to have_text "Number of questions: 3"
       end
 
       describe "taking the test" do 

@@ -12,17 +12,25 @@
     <table class="table table-striped">
       <thead>
         <tr>
-          From: <%= @exam.account.name %>
+          <th class="col-sm-8">
+            From: <%= @exam.account.name %>
+          </th>
+          <th class="col-sm-4"></th>
         </tr>
         <tr>
           <th class="col-sm-12">
-            <%= @exam.name %>
+            <span class="exam-name"><%= @exam.name %></span>
           </th>
         </tr>
       </thead>
       <tbody>
         <tr>
-          <%= @exam.description %>
+          <td>
+            <%= @exam.description %>
+          </td>
+        </tr>
+        <tr>
+          <td>Number of questions: <%= @exam.questions.count %></td>
         </tr>
       </tbody>
     </table>
