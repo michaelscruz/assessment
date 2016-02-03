@@ -1,3 +1,16 @@
+# == Schema Information
+#
+# Table name: exams
+#
+#  id          :integer          not null, primary key
+#  name        :string(255)
+#  description :text
+#  created_at  :datetime
+#  updated_at  :datetime
+#  account_id  :integer
+#  exam_type   :string(255)
+#
+
 class ExamsController < ApplicationController
   before_action :authenticate_user!, only: [:new, :create, :edit, :update, :destroy]
 
@@ -26,6 +39,7 @@ class ExamsController < ApplicationController
   # GET /tests/1/begin
   def begin
     @exam = Exam.includes(:questions).find_by(id: params[:id])
+    Score.create(user: current_user, exam: @exam) if Score.find_by(user: current_user, exam: @exam).nil?
     redirect_to exam_question_url(@exam, @exam.questions.first)
   end
 
