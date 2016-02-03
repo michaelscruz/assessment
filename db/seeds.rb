@@ -91,7 +91,7 @@ end
     puts "Question already exists."
   end
 
-  answer_1_q2 = Answer.new(text: "Three", value: 3, question: question_1)
+  answer_1_q2 = Answer.new(text: "Three", value: 3, question: question_2)
   existing_answer_1_q2 = Answer.where(value: answer_1_q2.value, question: question_1).first
   unless existing_answer_1_q2
     answer_1_q2.save!
@@ -101,7 +101,7 @@ end
     puts "Answer already exists."
   end
 
-  answer_2_q2 = Answer.new(text: "Four", value: 4, question: question_1)
+  answer_2_q2 = Answer.new(text: "Four", value: 4, question: question_2)
   existing_answer_2_q2 = Answer.where(value: answer_2_q2.value, question: question_1).first
   unless existing_answer_2_q2
     answer_2_q2.save!
@@ -111,7 +111,7 @@ end
     puts "Answer already exists."
   end
 
-  answer_3_q2 = Answer.new(text: "Five", value: 5, question: question_1)
+  answer_3_q2 = Answer.new(text: "Five", value: 5, question: question_2)
   existing_answer_3_q2 = Answer.where(value: answer_3_q2.value, question: question_1).first
   unless existing_answer_3_q2
     answer_3_q2.save!

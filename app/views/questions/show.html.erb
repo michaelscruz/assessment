@@ -3,30 +3,27 @@
 <div class="row">
   <div class="well col-sm-12 col-md-8 col-md-offset-2">
     <h1>Question #<%= @score.questions_answered+1 %></h1>
-    <table class="table">
+    <table class="table table-striped">
       <% if @question.multiple_choice? %>
         <%= form_for([@exam, @category_score]) do |f| %>
           <%= f.hidden_field(:category_id, value: @question.category.id) %>
           <thead>
             <tr>
               <th class="exam-name col-md-10"><%= @question.text %></th>
-              <th class="col-md-2"></th>
             </tr>
           </thead>
-          <tbody class="form-group">
+          <tbody>
             <% @question.answers.each do |answer| %>
               <tr>
-                <td class="radio">
+                <td>
                   <%= radio_button_tag(:answer_value, answer.value) %>
                   <%= label_tag(answer.element_id(answer.value), answer.text) %>
                 </td>
-                <td></td>
               </tr>
             <% end %>
             <tr>
-              <td></td>
               <td>
-                <%= f.submit "Next", class: "btn btn-lg btn-primary" %>
+                <%= f.submit "Next", class: "btn btn-lg btn-primary pull-right" %>
               </td>
             </tr>
           </tbody>

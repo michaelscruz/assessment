@@ -42,7 +42,11 @@ class ExamsController < ApplicationController
     score = Score.find_by(user: current_user, exam: @exam)
     score ||= Score.create(user: current_user, exam: @exam)
     questions = @exam.questions.order(:created_at)
-    redirect_to exam_question_url(@exam, questions[score.questions_answered])
+    unless score.questions_answered == questions.length
+      redirect_to exam_question_url(@exam, questions[score.questions_answered])
+    else
+      redirect_to exam_complete_url
+    end
   end
 
   # POST /tests

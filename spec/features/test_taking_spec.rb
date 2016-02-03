@@ -80,6 +80,20 @@ RSpec.describe "TestTakingPages", type: :feature do
         end
 
         it { should have_content 'Question #2' }
+
+        describe "finishing the test" do
+          before do 
+            page.first(:radio_button).set(true)
+            click_link "Next"
+            page.first(:radio_button).set(true)
+            click_link "Next"
+          end
+
+          it "should bring user to the test complete page" do 
+            expect(page).to have_title "Test Complete"
+            expect(page).to have_link "See results"
+          end
+        end
       end
     end 
   end

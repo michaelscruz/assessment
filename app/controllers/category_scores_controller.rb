@@ -18,15 +18,15 @@ class CategoryScoresController < ApplicationController
     @category_score.score = params[:answer_value]
 
     if @category_score.save
-      @exam = @category_score.category.exam
+      @exam = Exam.find(params[:exam_id])
       @score = Score.find_by(user: current_user, exam: @exam)
       @score.questions_answered += 1
       @score.save!
       redirect_to begin_exam_path(@exam)
     else
       @question = @exam.questions.order(:created_at)[@score.questions_answered]
-      @question.errors.add(:exam, " something went wrong")
-      redirect_to :back
+      @question.errors.add("You must choose an answer.")
+      redirect_to exam_question_url(@exam, @question)
     end
   end
 
