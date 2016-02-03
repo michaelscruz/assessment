@@ -45,7 +45,7 @@ class ExamsController < ApplicationController
     unless score.questions_answered == questions.length
       redirect_to exam_question_url(@exam, questions[score.questions_answered])
     else
-      redirect_to exam_complete_url
+      redirect_to complete_exam_url(@exam)
     end
   end
 

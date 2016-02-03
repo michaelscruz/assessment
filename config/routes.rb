@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   resources :tests, controller: :exams, as: :exams do
     member do
       get 'begin', as: :begin
+      get 'complete', as: :complete
     end
     resources :questions
     resources :category_scores, only: [:create, :update]
