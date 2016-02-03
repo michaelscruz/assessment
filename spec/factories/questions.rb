@@ -27,4 +27,10 @@ FactoryGirl.define do
       question.answers = create_list(:answer, 3, question: question)
     end
   end
+
+  factory :questions_with_blank_category_with_answers, :parent => :question do
+    after(:build) do |question|
+      question.answers = create_list(:answer, 3, question: question)
+    end
+  end 
 end

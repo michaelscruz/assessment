@@ -84,9 +84,9 @@ RSpec.describe "TestTakingPages", type: :feature do
         describe "finishing the test" do
           before do 
             page.first(:radio_button).set(true)
-            click_link "Next"
+            click_button "Next"
             page.first(:radio_button).set(true)
-            click_link "Next"
+            click_button "Next"
           end
 
           it "should bring user to the test complete page" do 
