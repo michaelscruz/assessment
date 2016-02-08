@@ -1,0 +1,23 @@
+<h1>Listing category_reports</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @category_reports.each do |category_report| %>
+      <tr>
+        <td><%= link_to 'Show', category_report %></td>
+        <td><%= link_to 'Edit', edit_category_report_path(category_report) %></td>
+        <td><%= link_to 'Destroy', category_report, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Category report', new_category_report_path %>
