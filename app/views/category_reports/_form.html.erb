@@ -13,6 +13,11 @@
         </div>
       <% end %>
 
+      <div class="form-group">
+        <%= f.label :value_min, "Minimum value" %>
+        <%= f.number_field :value_min %>
+      </div>
+
       <div class="actions">
         <%= f.submit %>
       </div>

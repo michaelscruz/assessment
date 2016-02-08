@@ -28,7 +28,11 @@ class CategoryReportsController < ApplicationController
   # GET /category_reports/new
   def new
     @category_report = CategoryReport.new
-    @exam = Exam.find(params[:exam_id])
+    @exam = Exam.includes(:categories).find_by(id: params[:exam_id])
+    # Add view to choose which category to create reports for
+    # Add method to determine possible range values
+    # => Could force it to choose the lowest number in range and allow the user to set the highest for this report
+    # => so that gaps are not left.
   end
 
   # GET /category_reports/1/edit
