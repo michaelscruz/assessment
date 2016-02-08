@@ -15,6 +15,7 @@ class CategoryReportsController < ApplicationController
   # GET /category_reports/new
   def new
     @category_report = CategoryReport.new
+    @exam = Exam.find(params[:exam_id])
   end
 
   # GET /category_reports/1/edit
