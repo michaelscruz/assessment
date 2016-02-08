@@ -2,12 +2,13 @@
 #
 # Table name: category_reports
 #
-#  id          :integer          not null, primary key
-#  category_id :integer
-#  text        :text
-#  value_key   :integer
-#  created_at  :datetime
-#  updated_at  :datetime
+#  id                :integer          not null, primary key
+#  category_id       :integer
+#  text              :text
+#  created_at        :datetime
+#  updated_at        :datetime
+#  value_min         :integer
+#  value_max_integer :integer
 #
 
 FactoryGirl.define do
