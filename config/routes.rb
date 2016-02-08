@@ -9,6 +9,7 @@ Rails.application.routes.draw do
     end
     resources :questions
     resources :category_scores, only: [:create, :update]
+    resources :category_reports
   end
 
   resources :accounts, except: [:index, :show]

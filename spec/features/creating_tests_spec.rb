@@ -187,11 +187,20 @@ RSpec.describe "CreatingTests", type: :feature do
                 end
               end
 
-              it { should have_title "Sample Test" }
+              it { should have_title "Results Reports" }
             end
           end
         end
       end
     end
+  end
+
+  describe "creating results reports for new tests", :results_reports, js: true do
+    before do
+      @user = create_signed_in_user(account: true, no_capybara: true)
+      create_a_new_test_with_capybara(@user)
+    end
+
+    it { should have_title "Results Reports" }
   end
 end
