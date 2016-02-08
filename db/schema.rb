@@ -51,7 +51,7 @@ ActiveRecord::Schema.define(version: 20160208185011) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "value_min"
-    t.integer  "value_max_integer"
+    t.integer  "value_max"
   end
 
   add_index "category_reports", ["category_id"], name: "index_category_reports_on_category_id", using: :btree
