@@ -201,6 +201,12 @@ RSpec.describe "CreatingTests", type: :feature do
       create_a_new_test_with_capybara(@user)
     end
 
-    it { should have_title "Results Reports" }
+    it { should have_title "Category Results" }
+
+    describe "creating the reports" do 
+      before { click_link "First Category" }
+
+      it { should have_title "Results Reports" }
+    end
   end
 end

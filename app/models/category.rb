@@ -24,4 +24,19 @@ class Category < ActiveRecord::Base
   def id_name_with_underscores
     "category_" + self.name.gsub(' ', '_')
   end
+
+  def find_value_max
+    @max_value = 0
+    self.questions.each { |question| @max_value += question.answers.maximum(:value) }
+    @max_value
+  end
+
+  def find_remaining_value_min
+    @min_value = self.category_reports.maximum(:value_max)
+    unless @min_value
+      @min_value = 0
+      self.questions.each { |question| @min_value += question.answers.minimum(:value) }
+    end
+    @min_value
+  end
 end

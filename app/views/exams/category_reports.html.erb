@@ -1,0 +1,15 @@
+<%= provide(:title, "Category Results") %>
+
+<div class="row">
+  <div class="well col-md-8 col-md-offset-2">
+    <h1>Creating Results Reports</h1>
+    <p>You will need to create results reports for each category in your test. We will calculate the total possible range of scores for each category, and you can create however many reports you'd like for that category, as long as there is a report for each possible score. After a test taker completes a test, they will receive an assembled report composed of each of their category reports.</p>
+    <p><strong>To begin, select a category below:</strong></p>
+    <ul>
+      <!-- Will need to deactivate links for categories that already have reports. Will need to add a field to categories that indicates whether or not all of its reports have been created. After the link is deactivated, add an "edit" link that can be used to change it. After all categories have all reports, enable a "Next" button. -->
+      <% @exam.categories.each do |category| %>
+        <li><%= link_to category.name, new_exam_category_category_report_path(@exam, category) %></li>
+      <% end %>
+    </ul> 
+  </div>
+</div>

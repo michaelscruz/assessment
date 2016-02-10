@@ -36,6 +36,10 @@ class ExamsController < ApplicationController
     @exam = Exam.find(params[:id])
   end
 
+  def category_reports
+    @exam = Exam.includes(:categories).find_by(id: params[:id])
+  end
+
   # GET /tests/1/begin
   def begin
     @exam = Exam.includes(:questions).find_by(id: params[:id])

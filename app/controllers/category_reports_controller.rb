@@ -28,7 +28,10 @@ class CategoryReportsController < ApplicationController
   # GET /category_reports/new
   def new
     @category_report = CategoryReport.new
-    @exam = Exam.includes(:categories).find_by(id: params[:exam_id])
+    @exam = Exam.includes(:categories, :questions, :answers).find_by(id: params[:exam_id])
+    @category = @exam.categories.find_by(id: params[:category_id])
+    @value_max = @category.find_value_max
+    @value_min = @category.find_remaining_value_min
     # Add view to choose which category to create reports for
     # Add method to determine possible range values
     # => Could force it to choose the lowest number in range and allow the user to set the highest for this report

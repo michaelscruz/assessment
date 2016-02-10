@@ -13,7 +13,7 @@ def create_a_new_test_with_capybara(user)
   click_button "Next"
   click_link "Add answer"
   choose "Add new category"
-  fill_in "New category", with: "Sample Category"
+  fill_in "New category", with: "First Category"
   fill_in "Question text", with: "Here is my first question"
   fill_in "Answer text", with: "First option"
   fill_in "Answer value", with: 3

@@ -6,10 +6,13 @@ Rails.application.routes.draw do
     member do
       get 'begin', as: :begin
       get 'complete', as: :complete
+      get 'category_reports', as: :category_reports
     end
     resources :questions
     resources :category_scores, only: [:create, :update]
-    resources :category_reports
+    resources :categories do 
+      resources :category_reports
+    end
   end
 
   resources :accounts, except: [:index, :show]
