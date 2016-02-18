@@ -30,12 +30,8 @@ class CategoryReportsController < ApplicationController
     @category_report = CategoryReport.new
     @exam = Exam.includes(:categories, :questions, :answers).find_by(id: params[:exam_id])
     @category = @exam.categories.find_by(id: params[:category_id])
-    @value_max = @category.find_value_max
-    @value_min = @category.find_remaining_value_min
-    # Add view to choose which category to create reports for
-    # Add method to determine possible range values
-    # => Could force it to choose the lowest number in range and allow the user to set the highest for this report
-    # => so that gaps are not left.
+    @value_max = params[:value_max] ? params[:value_max] : @category.find_value_max
+    @value_min = params[:value_min] ? params[:value_min] : @category.find_remaining_value_min
   end
 
   # GET /category_reports/1/edit
@@ -46,15 +42,22 @@ class CategoryReportsController < ApplicationController
   # POST /category_reports.json
   def create
     @category_report = CategoryReport.new(category_report_params)
+    @exam = Exam.includes(:categories, :questions, :answers).find_by(id: params[:exam_id])
+    @category = @exam.categories.find_by(id: params[:category_id])
+    @category_report.category = @category 
+    @value_max = @category.find_value_max
 
-    respond_to do |format|
-      if @category_report.save
-        format.html { redirect_to @category_report, notice: 'Category report was successfully created.' }
-        format.json { render :show, status: :created, location: @category_report }
+    if @category_report.save
+      if @category.find_remaining_value_min == @value_max
+        # Go back to the list of categories if all reports have been created for this category
+        redirect_to category_reports_exam_path(@exam), notice: "All reports for category #{@category.name} have been created successfully"
       else
-        format.html { render :new }
-        format.json { render json: @category_report.errors, status: :unprocessable_entity }
+        # Go back to another new report form for this category if not all values have been covered
+        redirect_to new_exam_category_category_report_path(@exam, @category, value_min: @category_report.value_max + 1, value_max: @value_max), notice: "Category report created successfully"
       end
+    else
+      @value_min = @category.find_remaining_value_min
+      render :new
     end
   end
 
@@ -90,6 +93,6 @@ class CategoryReportsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def category_report_params
-      params[:category_report]
+      params.require(:category_report).permit(:text, :value_max, :value_min)
     end
 end

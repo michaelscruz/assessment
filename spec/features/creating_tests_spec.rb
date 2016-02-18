@@ -201,12 +201,35 @@ RSpec.describe "CreatingTests", type: :feature do
       create_a_new_test_with_capybara(@user)
     end
 
-    it { should have_title "Category Results" }
+    it "should display a proper category reports page" do
+      expect(page).to have_title("Category Results")
+      expect(page).to have_link("First Category")
+      expect(page).to have_link("Second Category")
+      expect(page).to have_link("Third Category")
+    end
 
     describe "creating the reports" do 
       before { click_link "First Category" }
 
-      it { should have_title "Results Reports" }
+      it "should display a category_report form with the min value set and the range of possible values displayed" do
+        expect(page).to have_title("Results Reports")
+        expect(page).to have_content("from -3 to 3")
+        expect(page).to have_content("Minimum value for this report: -3")
+      end
+
+      describe "filling out the form correctly for half of the possible range", :creating_first_report do
+        before do
+          fill_in("Maximum value for this report:", with: -1)
+          fill_in("category_report_text", with: "This is a low score. You are terrible.")
+          click_button "Next"
+        end
+
+        it "should display another category report form for the same category" do
+          expect(page).to have_title("Results Reports")
+          expect(page).to have_content("First Category")
+          expect(page).to_not have_content("error")
+        end
+      end 
     end
   end
 end

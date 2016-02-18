@@ -1,6 +1,8 @@
 <%= provide(:title, "Results Reports") %>
 
-<h1>New category_report</h1>
+<h1>New Category Report for <%= @category.name %></h1>
+
+<p>This category needs reports for results ranging from <%= @value_min %> to <%= @value_max %></p>
 
 <%= render 'form' %>
 

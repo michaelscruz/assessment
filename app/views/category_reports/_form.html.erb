@@ -14,12 +14,22 @@
       <% end %>
 
       <div class="form-group">
-        <%= f.label :value_min, "Minimum value" %>
-        <%= f.number_field :value_min %>
+        <strong>Minimum value for this report: <%= @value_min %></strong>
+        <%= f.hidden_field(:value_min, value: @value_min) %>
+      </div>
+
+      <div class="form-group">
+        <%= f.label :value_max, "Maximum value for this report: " %>
+        <%= f.number_field :value_max, autofocus: true, min: @value_min, max: @value_max, class: "form-control" %>
+      </div>
+
+      <div class="form-group">
+        <%= f.label :text, "Report for this range of values:" %>
+        <%= f.text_area :text, autofocus: true, class: "form-control" %>
       </div>
 
       <div class="actions">
-        <%= f.submit %>
+        <%= f.submit "Next", class: "btn btn-lg btn-primary" %>
       </div>
     <% end %>
   </div>
