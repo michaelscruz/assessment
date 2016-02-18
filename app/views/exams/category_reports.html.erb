@@ -8,7 +8,11 @@
     <ul>
       <!-- Will need to deactivate links for categories that already have reports. Will need to add a field to categories that indicates whether or not all of its reports have been created. After the link is deactivated, add an "edit" link that can be used to change it. After all categories have all reports, enable a "Next" button. -->
       <% @exam.categories.each do |category| %>
-        <li><%= link_to category.name, new_exam_category_category_report_path(@exam, category) %></li>
+        <% if category.reports_complete %>
+          <li><%= category.name %> (complete) | <%= link_to "edit", '#' %></li>
+        <% else %>
+          <li><%= link_to category.name, new_exam_category_category_report_path(@exam, category) %></li>
+        <% end %>
       <% end %>
     </ul> 
   </div>
