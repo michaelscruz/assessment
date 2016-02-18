@@ -229,6 +229,20 @@ RSpec.describe "CreatingTests", type: :feature do
           expect(page).to have_content("First Category")
           expect(page).to_not have_content("error")
         end
+
+        describe "filling out the second and final category report for this category" do
+          before do
+            fill_in("Maximum value for this report:", with: 3)
+            fill_in("category_report_text", with: "This is a good score. You are smart.")
+            click_button "Next"
+          end
+
+          it "should display the category reports page with First Category complete" do 
+            expect(page).to have_title "Category Results"
+            expect(page).to have_content "First Catagory (complete) | edit"
+            expect(page).to_no have_link "First Category"
+          end
+        end
       end 
     end
   end
