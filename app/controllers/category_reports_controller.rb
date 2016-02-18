@@ -17,7 +17,8 @@ class CategoryReportsController < ApplicationController
   # GET /category_reports
   # GET /category_reports.json
   def index
-    @category_reports = CategoryReport.all
+    @category = Category.includes(:category_reports, :exam).find_by(id: params[:category_id])
+    @category_reports = @category.category_reports.order("value_min asc")
   end
 
   # GET /category_reports/1
@@ -30,12 +31,17 @@ class CategoryReportsController < ApplicationController
     @category_report = CategoryReport.new
     @exam = Exam.includes(:categories, :questions, :answers).find_by(id: params[:exam_id])
     @category = @exam.categories.find_by(id: params[:category_id])
-    @value_max = params[:value_max] ? params[:value_max] : @category.find_value_max
-    @value_min = params[:value_min] ? params[:value_min] : @category.find_remaining_value_min
+    @value_max = params[:value_max] || @category.find_value_max
+    @value_min = params[:value_min] || @category.find_remaining_value_min
   end
 
   # GET /category_reports/1/edit
   def edit
+    @category_report = CategoryReport.find(params[:id])
+    @exam = Exam.includes(:categories, :questions, :answers).find_by(id: params[:exam_id])
+    @category = @exam.categories.find_by(id: params[:category_id])
+    @value_max = params[:value_max] || @category.find_value_max
+    @value_min = params[:value_min] || @category.find_value_min
   end
 
   # POST /category_reports

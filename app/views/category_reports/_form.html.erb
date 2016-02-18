@@ -19,8 +19,12 @@
       </div>
 
       <div class="form-group">
-        <%= f.label :value_max, "Maximum value for this report: " %>
-        <%= f.number_field :value_max, autofocus: true, min: @value_min, max: @value_max, class: "form-control" %>
+        <% if params[:action] == "edit" %>
+          <strong>Maximum value for this report: <%= @value_max %></strong>
+        <% else %>
+          <%= f.label :value_max, "Maximum value for this report: " %>
+          <%= f.number_field :value_max, autofocus: true, min: @value_min, max: @value_max, class: "form-control" %>
+        <% end %>
       </div>
 
       <div class="form-group">

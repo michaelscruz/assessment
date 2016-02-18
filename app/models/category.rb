@@ -31,6 +31,12 @@ class Category < ActiveRecord::Base
     @max_value
   end
 
+  def find_value_min
+    @min_value = 0
+    self.questions.each { |question| @min_value += question.answers.minimum(:value) }
+    @min_value
+  end
+
   def find_remaining_value_min
     @min_value = self.category_reports.maximum(:value_max)
     unless @min_value

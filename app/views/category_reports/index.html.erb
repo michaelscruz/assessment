@@ -1,23 +1,26 @@
-<h1>Listing category_reports</h1>
+<%= provide(:title, "Edit - #{@category.name} Reports") %>
 
-<table>
-  <thead>
-    <tr>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @category_reports.each do |category_report| %>
-      <tr>
-        <td><%= link_to 'Show', category_report %></td>
-        <td><%= link_to 'Edit', edit_category_report_path(category_report) %></td>
-        <td><%= link_to 'Destroy', category_report, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<br>
-
-<%= link_to 'New Category report', new_category_report_path %>
+<div class="row">
+  <div class="well col-md-8 col-md-offset-2">
+    <h1>Category reports for <%= @category.name %></h1>
+    <h4></h4>
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th class="col-xs-3">Min Value</th>
+          <th class="col-xs-3">Max Value</th>
+          <th class="col-xs-6">Text</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @category_reports.each do |report| %>
+          <tr>
+            <td><%= report.value_min %></td>
+            <td><%= report.value_max %></td>
+            <td><%= link_to truncate(report.text), edit_exam_category_category_report_path(@category.exam, @category, report) %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>

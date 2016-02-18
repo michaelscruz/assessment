@@ -278,6 +278,22 @@ RSpec.describe "CreatingTests", type: :feature do
         expect(page).to have_content "Third Category (complete)"
         expect(page).to have_link "Next"
       end
+
+      describe "editing a category's reports", :edit_category_reports do
+        before do 
+          page.first(:link, "edit").click
+        end
+
+        it { should have_title "Edit - First Category Reports" }
+
+        describe "editing a report" do 
+          before do
+            click_link "This is a low"
+          end
+
+          it { should have_title "Edit - Results Reports for First Category" }
+        end
+      end
     end
   end
 end
