@@ -80,7 +80,7 @@ RSpec.describe "CreatingTests", type: :feature do
             click_button "Finalize test"
           end
 
-          it { should have_title "Sample Long Answer Test" }
+          it { should have_title "Category Results" }
         end
 
         describe "selecting Finalize test with a blank question" do
@@ -187,7 +187,7 @@ RSpec.describe "CreatingTests", type: :feature do
                 end
               end
 
-              it { should have_title "Results Reports" }
+              it { should have_title "Category Results" }
             end
           end
         end
@@ -239,11 +239,45 @@ RSpec.describe "CreatingTests", type: :feature do
 
           it "should display the category reports page with First Category complete" do 
             expect(page).to have_title "Category Results"
-            expect(page).to have_content "First Catagory (complete) | edit"
-            expect(page).to_no have_link "First Category"
+            expect(page).to have_content "First Category (complete) | edit"
+            expect(page).to_not have_link "First Category"
+            expect(page).to_not have_link "Next"
           end
         end
       end 
+    end
+
+    describe "filling in all reports for all categories", :all_reports do 
+      before do 
+        click_link "First Category"
+        fill_in("Maximum value for this report:", with: -1)
+        fill_in("category_report_text", with: "This is a low score. You are terrible.")
+        click_button "Next"
+        fill_in("Maximum value for this report:", with: 3)
+        fill_in("category_report_text", with: "This is a good score. You are smart.")
+        click_button "Next"
+        click_link "Second Category"
+        fill_in("Maximum value for this report:", with: -1)
+        fill_in("category_report_text", with: "This is a low score. You are terrible.")
+        click_button "Next"
+        fill_in("Maximum value for this report:", with: 3)
+        fill_in("category_report_text", with: "This is a good score. You are smart.")
+        click_button "Next"
+        click_link "Third Category"
+        fill_in("Maximum value for this report:", with: -1)
+        fill_in("category_report_text", with: "This is a low score. You are terrible.")
+        click_button "Next"
+        fill_in("Maximum value for this report:", with: 3)
+        fill_in("category_report_text", with: "This is a good score. You are smart.")
+        click_button "Next"
+      end
+
+      it "should have all categories marked as complete with a Next link (as a button)" do
+        expect(page).to have_content "First Category (complete)"
+        expect(page).to have_content "Second Category (complete)"
+        expect(page).to have_content "Third Category (complete)"
+        expect(page).to have_link "Next"
+      end
     end
   end
 end

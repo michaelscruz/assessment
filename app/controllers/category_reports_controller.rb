@@ -50,6 +50,8 @@ class CategoryReportsController < ApplicationController
     if @category_report.save
       if @category.find_remaining_value_min == @value_max
         # Go back to the list of categories if all reports have been created for this category
+        @category.reports_complete = true
+        @category.save!
         redirect_to category_reports_exam_path(@exam), notice: "All reports for category #{@category.name} have been created successfully"
       else
         # Go back to another new report form for this category if not all values have been covered
