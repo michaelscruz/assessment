@@ -29,27 +29,22 @@ class CategoryReportsController < ApplicationController
   # GET /category_reports/new
   def new
     @category_report = CategoryReport.new
-    @exam = Exam.includes(:categories, :questions, :answers).find_by(id: params[:exam_id])
-    @category = @exam.categories.find_by(id: params[:category_id])
+    set_exam_and_category
     @value_max = params[:value_max] || @category.find_value_max
     @value_min = params[:value_min] || @category.find_remaining_value_min
   end
 
   # GET /category_reports/1/edit
   def edit
-    @category_report = CategoryReport.find(params[:id])
-    @exam = Exam.includes(:categories, :questions, :answers).find_by(id: params[:exam_id])
-    @category = @exam.categories.find_by(id: params[:category_id])
-    @value_max = params[:value_max] || @category.find_value_max
-    @value_min = params[:value_min] || @category.find_value_min
+    @value_max = @category_report.value_max
+    @value_min = @category_report.value_min
   end
 
   # POST /category_reports
   # POST /category_reports.json
   def create
     @category_report = CategoryReport.new(category_report_params)
-    @exam = Exam.includes(:categories, :questions, :answers).find_by(id: params[:exam_id])
-    @category = @exam.categories.find_by(id: params[:category_id])
+    set_exam_and_category
     @category_report.category = @category 
     @value_max = @category.find_value_max
 
@@ -72,14 +67,12 @@ class CategoryReportsController < ApplicationController
   # PATCH/PUT /category_reports/1
   # PATCH/PUT /category_reports/1.json
   def update
-    respond_to do |format|
-      if @category_report.update(category_report_params)
-        format.html { redirect_to @category_report, notice: 'Category report was successfully updated.' }
-        format.json { render :show, status: :ok, location: @category_report }
-      else
-        format.html { render :edit }
-        format.json { render json: @category_report.errors, status: :unprocessable_entity }
-      end
+    if @category_report.update(category_report_params)
+      redirect_to exam_category_category_reports_path(@exam, @category), notice: "Your report was successfully updated."
+    else
+      @value_min = @category_report.value_min
+      @value_max = @category_report.value_max
+      render :edit
     end
   end
 
@@ -97,6 +90,12 @@ class CategoryReportsController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_category_report
       @category_report = CategoryReport.find(params[:id])
+      set_exam_and_category
+    end
+
+    def set_exam_and_category
+      @exam = Exam.includes(:categories, :questions, :answers).find_by(id: params[:exam_id])
+      @category = @exam.categories.find_by(id: params[:category_id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

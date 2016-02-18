@@ -33,7 +33,7 @@
       </div>
 
       <div class="actions">
-        <%= f.submit "Next", class: "btn btn-lg btn-primary" %>
+        <%= f.submit @category_report.new_record? ? "Next" : "Update", class: "btn btn-lg btn-primary" %>
       </div>
     <% end %>
   </div>

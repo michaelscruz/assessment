@@ -289,9 +289,11 @@ RSpec.describe "CreatingTests", type: :feature do
         describe "editing a report" do 
           before do
             click_link "This is a low"
+            fill_in "Report for this range of values:", with: "You are classy, but stupid."
+            click_button "Update"
           end
 
-          it { should have_title "Edit - Results Reports for First Category" }
+          it { should have_title "Edit - First Category Reports" }
         end
       end
     end
